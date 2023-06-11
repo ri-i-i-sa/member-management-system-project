@@ -67,6 +67,12 @@ tr.line td:not(:first-child) {
   padding-bottom: 8px;
 }
 
+.line img {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
 .button-date,.button-history {
   background: #FFFFFF;
   border: 1px solid #7B7979;
