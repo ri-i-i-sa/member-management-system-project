@@ -1,3 +1,98 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
+
+h1 {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 16px;
+}
+
+th,td,.text-medium {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 14px;
+}
+
+.flex {
+  display: flex;
+}
+
+.bkg {
+  background: rgba(196, 196, 196, 0.03);
+}
+
+.sarch-wrap h1 {
+  margin-top: 120px;
+  margin-left: 10%;
+}
+
+.sarchbox-wrap {
+  width: 80%;
+  margin:0 auto;
+  padding-top: 34px;
+  background: #FFFFFF;
+  border: 1px solid #292929;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.flex {
+  justify-content: space-evenly;
+}
+
+.form-item dt {
+  margin-top: 16px;
+}
+
+.sarch.button {
+  margin-left: 80%;
+  margin-bottom: 40px;
+}
+
+.member-wrap h1 {
+  margin-top: 40px;
+  margin-left: 10%;
+}
+
+.member-view.flex {
+  justify-content: space-around;
+}
+
+tr.heading th:not(:first-child) {
+  padding-left: 32px;
+  padding-bottom: 8px;
+}
+
+tr.line td:not(:first-child) {
+  padding-left: 32px;
+  padding-bottom: 8px;
+}
+
+.button-date,.button-history {
+  background: #FFFFFF;
+  border: 1px solid #7B7979;
+  border-radius: 20px;
+  width: 80px;
+  height: 32px;
+  padding-top: 4px;
+}
+
+.button-date a,.button-history a {
+  padding-left: 10px;
+  padding-top: 16px;
+  text-decoration: none;
+  color: #292929;
+}
+
+.button-date:hover,.button-history:hover {
+  background: #818080;
+  border-radius: 20px;
+}
+
+.button-date a:hover,.button-history a:hover{
+  color: #FFFFFF;
+}
+
+.button-history {
+  margin-left: 8px;
+}
+

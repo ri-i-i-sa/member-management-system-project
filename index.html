@@ -1,108 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
 
     <title>会員管理システム</title>
 </head>
 <body>
-    <main class="bkg">
-        <div class="sarch-wrap">
-            <h1>検索</h1>
-                <div class="sarchbox-wrap">
-                     <dl>
-                        <div class="form-item">
-                            <dt>ID</dt>
-                            <dd><input type="text"></dd>
-                        </div>
-                        <div class="form-item">
-                            <dt>名前（漢字）</dt>
-                            <dd><input type="text"></dd>
-                        </div>
-                        <div class="form-item">
-                            <dt>名前（ふりがな）</dt>
-                            <dd><input type="text"></dd>
-                        </div>
-                        <div class="form-item">
-                            <dt>電話番号</dt>
-                            <dd><input type="tel"></dd>
-                        </div>
-                        <div class="form-item">
-                            <dt>会員ステータス</dt>
-                            <dd>
-                                <select>
-                                    <option value="指定しない">指定しない</option>
-                                    <option value="一般">一般</option>
-                                    <option value="VIP">VIP</option>
-                                </select>
-                            </dd>
-                        </div>
-                    </dl>
-                        <div>
-                            <input type="submit" value="検索">
-                        </div>
+  <main class="bkg">
+    <div class="sarch-wrap">
+      <h1>検索</h1>
+        <div class="sarchbox-wrap">
+            <dl class="form-wrap flex">
+              <div>
+                <div class="form-item">
+                  <dt class="text-medium">ID</dt>
+                  <dd><input type="text"></dd>
                 </div>
-        </div>
-        <div class="member-wrap">
-            <h1>会員一覧</h1>
-                <table>
-                    <tr>
-                        <th>id</th>
-                        <th>名前（漢字）</th>
-                        <th>名前（ふりがな）</th>
-                        <th>性別</th>
-                        <th>電話番号</th>
-                        <th>誕生日</th>
-                        <th>会員ステータス</th>
-                        <th>来店回数</th>
-                        <th>管理オプション</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>美空結音</td>
-                        <td>みそらゆいね</td>
-                        <td>女</td>
-                        <td>080−1111−1111</td>
-                        <td>2005/06/07</td>
-                        <td>VIP</td>
-                        <td>4</td>
-                        <td>ダミー</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>美空結音</td>
-                        <td>みそらゆいね</td>
-                        <td>女</td>
-                        <td>080−1111−1111</td>
-                        <td>2005/06/07</td>
-                        <td>VIP</td>
-                        <td>4</td>
-                        <td>ダミー</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>美空結音</td>
-                        <td>みそらゆいね</td>
-                        <td>女</td>
-                        <td>080−1111−1111</td>
-                        <td>2005/06/07</td>
-                        <td>VIP</td>
-                        <td>4</td>
-                        <td>ダミー</td>
-                    </tr>
-                </table>
+                <div class="form-item">
+                  <dt class="text-medium">名前（漢字）</dt>
+                  <dd><input type="text"></dd>
+                </div>
+                <div class="form-item">
+                  <dt class="text-medium">名前（ふりがな）</dt>
+                  <dd><input type="text"></dd>
+                </div>
+              </div>
 
+              <div>
+                <div class="form-item">
+                  <dt class="text-medium">電話番号</dt>
+                  <dd><input type="tel"></dd>
+                </div>
+                <div class="form-item">
+                  <dt class="text-medium">会員ステータス</dt>
+                  <dd>
+                    <select>
+                      <option class="text-medium" value="指定しない">指定しない</option>
+                      <option class="text-medium" value="一般">一般</option>
+                      <option class="text-medium" value="VIP">VIP</option>
+                    </select>
+                  </dd>
+                </div>
+            </dl>
+          <div class="sarch button">
+            <input class="text-medium" type="submit" value="検索">
+          </div>
         </div>
-    </main>
+    </div>
+    <div class="member-wrap">
+      <h1>会員一覧</h1>
+        <table class="member-view flex">
+          <tr class="heading">
+            <th>ID</th>
+            <th class="heading-animation">名前（漢字）</th>
+            <th>名前（ふりがな）</th>
+            <th>性別</th>
+            <th>電話番号</th>
+            <th>誕生日</th>
+            <th>会員ステータス</th>
+            <th>来店回数</th>
+            <th>管理オプション</th>
+          </tr>
+          <tr class="line">
+            <td>1</td>
+            <td>美空結音</td>
+            <td>みそらゆいね</td>
+            <td>女</td>
+            <td>080−1111−1111</td>
+            <td>2005/06/07</td>
+            <td>VIP</td>
+            <td>4</td>
+            <td>
+              <div class="flex">
+                <div class="button-date"><a href="#" class="text-medium">来店登録</a>
+                </div>
+                <div class="button-history"><a href="#" class="text-medium">来店履歴</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="line">
+            <td>1</td>
+            <td>美空結音</td>
+            <td>みそらゆいね</td>
+            <td>女</td>
+            <td>080−1111−1111</td>
+            <td>2005/06/07</td>
+            <td>VIP</td>
+            <td>4</td>
+            <td>
+              <div class="flex">
+                <div class="button-date"><a href="#" class="text-medium">来店登録</a>
+                </div>
+                <div class="button-history"><a href="#" class="text-medium">来店履歴</a>
+                </div>
+              </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="./js/script.js"></script>
+            </td>
+          </tr>
+          <tr class="line">
+            <td>1</td>
+            <td>美空結音</td>
+            <td>みそらゆいね</td>
+            <td>女</td>
+            <td>080−1111−1111</td>
+            <td>2005/06/07</td>
+            <td>VIP</td>
+            <td>4</td>
+            <td>
+              <div class="flex">
+                <div class="button-date"><a href="#" class="text-medium">来店登録</a>
+                </div>
+                <div class="button-history"><a href="#" class="text-medium">来店履歴</a>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+      </table>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>
