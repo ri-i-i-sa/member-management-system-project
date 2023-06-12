@@ -3,29 +3,32 @@
 }
 
 h1 {
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 16px;
 }
 
 td,.text-medium {
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 14px;
 }
+
+th {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  }
+
 
 .flex {
   display: flex;
 }
 
-.bkg {
-  background: rgba(196, 196, 196, 0.03);
-}
-
-.sarch-wrap h1 {
+.search-wrap h1 {
   margin-top: 120px;
   margin-left: 10%;
 }
 
-.sarchbox-wrap {
+.searchbox-wrap {
   width: 80%;
   margin:0 auto;
   padding-top: 16px;
@@ -35,13 +38,36 @@ td,.text-medium {
   border-radius: 10px;
 }
 
-.flex {
+.form-wrap.flex {
   justify-content: space-around;
 }
 
-.sarch.button {
+.form-item {
+  margin-top: 16px;
+}
+
+.form-item.flex {
+  justify-content: space-between;
+}
+
+.search.button {
   margin-left: 80%;
   margin-bottom: 24px;
+}
+
+input.search-btn {
+  background-color: #4AEF82;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+}
+
+input.search-btn:hover {
+  background: #4AEF82;
+  transform: translateY(-2px);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .member-wrap h1 {
