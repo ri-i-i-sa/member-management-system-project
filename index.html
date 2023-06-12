@@ -8,51 +8,52 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet">
 
-    <title>会員管理システム</title>
+  <title>会員管理システム</title>
 </head>
 <body>
   <main class="bkg">
     <div class="search-wrap">
       <h1>検索</h1>
-        <div class="searchbox-wrap">
-            <dl class="form-wrap flex">
-              <div>
-                <div class="form-item flex">
-                    <dt class="text-medium">ID</dt>
-                    <dd><input type="text"></dd>
-                </div>
-                <div class="form-item flex">
-                  <dt class="text-medium">名前（漢字）</dt>
-                  <dd><input type="text"></dd>
-                </div>
-                <div class="form-item flex">
-                  <dt class="text-medium">名前（ふりがな）</dt>
-                  <dd><input type="text"></dd>
-                </div>
-              </div>
-
-              <div>
-                <div class="form-item flex">
-                  <dt class="text-medium">電話番号</dt>
-                  <dd><input type="tel"></dd>
-                </div>
-                <div class="form-item flex">
-                  <dt class="text-medium">会員ステータス</dt>
-                  <dd>
-                    <select>
-                      <option class="text-medium" value="指定しない">指定しない</option>
-                      <option class="text-medium" value="一般">一般</option>
-                      <option class="text-medium" value="VIP">VIP</option>
-                    </select>
-                  </dd>
-                </div>
-            </dl>
-          <div class="search button">
-            <input class="search-btn text-medium" type="submit" value="検索">
+      <div class="searchbox-wrap">
+        <div class="form-wrap flex">
+          <div>
+            <div class="form-item flex">
+              <dt class="text-medium">ID</dt>
+              <dd><input type="text"></dd>
+            </div>
+            <div class="form-item flex">
+              <dt class="text-medium">名前（漢字）</dt>
+              <dd><input type="text"></dd>
+            </div>
+            <div class="form-item flex">
+              <dt class="text-medium">名前（ふりがな）</dt>
+              <dd><input type="text"></dd>
+            </div>
           </div>
+      </div>
+
+          <div>
+            <div class="form-item flex">
+              <dt class="text-medium">電話番号</dt>
+              <dd><input type="tel"></dd>
+            </div>
+            <div class="form-item flex">
+              <dt class="text-medium">会員ステータス</dt>
+              <dd>
+                <select>
+                  <option class="text-medium" value="指定しない">指定しない</option>
+                  <option class="text-medium" value="一般">一般</option>
+                  <option class="text-medium" value="VIP">VIP</option>
+                </select>
+              </dd>
+            </div>
+          </div>
+        <div class="search button">
+          <input class="search-btn text-medium" type="submit" value="検索">
         </div>
+      </div>
     </div>
     <div class="member-wrap">
       <h1>会員一覧</h1>
@@ -102,7 +103,6 @@
                 <div class="button-history"><a href="#" class="text-medium">来店履歴</a>
                 </div>
               </div>
-
             </td>
           </tr>
           <tr class="line">
