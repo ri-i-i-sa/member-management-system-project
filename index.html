@@ -16,43 +16,51 @@
   <main class="bkg">
     <div class="search-wrap">
       <h1>検索</h1>
-      <div class="searchbox-wrap">
-        <div class="form-wrap flex">
-          <div>
-            <div class="form-item flex">
-              <dt class="text-medium">ID</dt>
-              <dd><input type="text"></dd>
+      <div class="search-bkg">
+        <div class="searchbox-wrap flex">
+          <div class="form-wrap flex">
+            <div>
+              <div class="form-item flex">
+                <dt class="text-medium">ID</dt>
+                <dd><input type="text"></dd>
+              </div>
+              <div class="form-item flex">
+                <dt class="text-medium">名前（漢字）</dt>
+                <dd><input type="text"></dd>
+              </div>
+              <div class="form-item flex">
+                <dt class="text-medium">名前（ふりがな）</dt>
+                <dd><input type="text"></dd>
+              </div>
             </div>
-            <div class="form-item flex">
-              <dt class="text-medium">名前（漢字）</dt>
-              <dd><input type="text"></dd>
-            </div>
-            <div class="form-item flex">
-              <dt class="text-medium">名前（ふりがな）</dt>
-              <dd><input type="text"></dd>
-            </div>
-          </div>
-      </div>
-
-          <div>
-            <div class="form-item flex">
-              <dt class="text-medium">電話番号</dt>
-              <dd><input type="tel"></dd>
-            </div>
-            <div class="form-item flex">
-              <dt class="text-medium">会員ステータス</dt>
-              <dd>
-                <select>
-                  <option class="text-medium" value="指定しない">指定しない</option>
-                  <option class="text-medium" value="一般">一般</option>
-                  <option class="text-medium" value="VIP">VIP</option>
-                </select>
+        </div>
+            <div>
+              <div class="form-item flex">
+                <dt class="text-medium">電話番号</dt>
+                <dd><input type="tel"></dd>
+              </div>
+              <div class="form-item flex">
+                <dt class="text-medium">会員ステータス</dt>
+              </div>
+              <!-- <div class="form-item flex"> -->
+              <dd class="search-radio-btn">
+                  <label>
+                    <input type="radio" name="status" value="unspecified" checked>指定しない
+                  </label>
+                  <label>
+                    <input type="radio" name="status" value="general">一般
+                  </label>
+                  <label>
+                    <input type="radio" name="status" value="vip">VIP
+                  </label>                
               </dd>
             </div>
+
+<!-- /            </div> -->
           </div>
-        <div class="search button">
-          <input class="search-btn text-medium" type="submit" value="検索">
-        </div>
+          <div class="search button">
+            <input class="search-btn text-medium" type="submit" value="検索">
+          </div>
       </div>
     </div>
     <div class="member-wrap">
