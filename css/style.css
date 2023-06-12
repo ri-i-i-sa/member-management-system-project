@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 16px;
+}
+
+td,.text-medium {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+}
+
+th {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  }
+
+p {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.search-wrap h1 {
+  margin-top: 120px;
+  margin-left: 20%;
+}
+
+.search-bkg {
+  width: 60%;
+  margin:0 auto;
+  padding-top: 16px;
+  background: #FFFFFF;
+  border: 1px solid #292929;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.searchbox-wrap.flex{
+  justify-content: space-around;
+}
+
+.form-wrap.flex {
+  justify-content: space-around;
+}
+
+.form-item {
+  margin-top: 16px;
+}
+
+.form-item.flex {
+  justify-content: space-between;
+}
+
+.search-radio-btn label {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.search.button {
+  margin-left: 80%;
+  margin-bottom: 24px;
+}
+
+input.search-btn {
+  background-color: #4AEF82;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+input.search-btn:hover {
+  background: #4AEF82;
+  transform: translateY(-2px);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.member-wrap h1 {
+  margin-top: 40px;
+  margin-left: 20%;
+}
+
+.member-view.flex {
+  justify-content: space-around;
+}
+
+tr.heading th:not(:first-child) {
+  padding-left: 32px;
+}
+
+tr.line td:not(:first-child) {
+  padding-left: 32px;
+  padding-bottom: 8px;
+}
+
+tr.heading th {
+  padding-bottom: 20px;
+}
+
+
+.heading {
+  background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
+  padding-bottom: 16px;
+}
+
+.line img {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+.button-date,.button-history {
+  background: #FFFFFF;
+  border: 1px solid #7B7979;
+  border-radius: 20px;
+  width: 80px;
+  height: 32px;
+  padding-top: 4px;
+}
+
+.button-date a,.button-history a {
+  padding-left: 10px;
+  padding-top: 16px;
+  text-decoration: none;
+  color: #292929;
+}
+
+.button-date:hover,.button-history:hover {
+  background: #818080;
+  border-radius: 20px;
+}
+
+.button-date a:hover,.button-history a:hover{
+  color: #FFFFFF;
+}
+
+.button-history {
+  margin-left: 8px;
+}
+
