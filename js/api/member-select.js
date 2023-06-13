@@ -1,6 +1,5 @@
-const baseUrl = process.env.BASE_URL
 
-var api_url = baseUrl; //生成したAPIのURLを指定
+  var api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; //生成したAPIのURLを指定
 
 fetch(api_url)
 .then(function (fetch_data) {
