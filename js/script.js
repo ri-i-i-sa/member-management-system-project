@@ -1,15 +1,24 @@
+var api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; //生成したAPIのURLを指定
 
-
-// 下記JQuery動作確認用
-$(function () {
-    setTimeout(function () {
-      $(".test").fadeIn(1200);
-    }, 6500); //0.5秒後にフェードイン
-    setTimeout(function () {
-      $(".test").fadeOut(500);
-    }, 50);
-    setTimeout(function () {
-      //2.5秒後にフェードアウト
-      $(".test").fadeIn(1500);
-    }, 3500);
-  });
+fetch(api_url)
+.then(function (fetch_data) {
+return fetch_data.json();
+})
+.then(function (json) {
+for (var i in json) {
+  console.log("json[i].id");
+  console.log(json[i].id);
+  console.log("json[i].name");
+  console.log(json[i].name);
+  console.log("json[i].furigana");
+  console.log(json[i].furigana);
+  console.log("json[i].gender");
+  console.log(json[i].gender);
+  console.log("json[i].tel");
+  console.log(json[i].tel);
+  console.log("json[i].birthday");
+  console.log(json[i].birthday);
+  console.log("json[i].status");
+  console.log(json[i].status);
+}
+});
