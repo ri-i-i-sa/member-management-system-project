@@ -25,7 +25,7 @@ for (var i in json) {
     $divsLine.append($('<td>4</td>'));
     $divsLine.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
 
-    $divs.append($('</tr>'));
+    $divsLine.append($('</tr>'));
     $("#members-table").append($divsLine);
   }
 });
