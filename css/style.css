@@ -41,13 +41,10 @@ p {
   border-radius: 10px;
 }
 
-.searchbox-wrap.flex{
+.searchbox-wrap.flex, .form-wrap.flex, .members-table.flex{
   justify-content: space-around;
 }
 
-.form-wrap.flex {
-  justify-content: space-around;
-}
 
 .form-item {
   margin-top: 16px;
