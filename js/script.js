@@ -14,7 +14,7 @@ for (var i in json) {
     let membersBirthday = birthdayToString(json[i].birthday);
     let membersStatus = getStatusText(json[i].status);
     
-    let $divsLine = $('<tr id="line" class="line">');
+    let $divsLine = $('<tr class="line">');
     $divsLine.append($('<td>' + membersId + '</td>'));
     $divsLine.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
     $divsLine.append($('<td>' + membersFurigana + '</td>'));

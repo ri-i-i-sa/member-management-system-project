@@ -89,8 +89,12 @@ input.search-btn:hover {
   margin-left: 20%;
 }
 
-.member-view.flex, .heading.flex{
+.member-view.flex, .heading.flex {
   justify-content: space-around;
+}
+
+.heading.flex {
+  width: 100%;
 }
 
 tr.heading th:not(:first-child) {
@@ -110,6 +114,11 @@ tr.heading th {
 .heading {
   background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
   padding-bottom: 16px;
+}
+
+.line-wrap {
+  width: 60%;
+  margin: 0 auto;
 }
 
 .line img {
