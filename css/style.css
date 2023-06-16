@@ -41,10 +41,13 @@ p {
   border-radius: 10px;
 }
 
-.searchbox-wrap.flex, .form-wrap.flex, .members-table.flex{
+.searchbox-wrap.flex{
   justify-content: space-around;
 }
 
+.form-wrap.flex {
+  justify-content: space-around;
+}
 
 .form-item {
   margin-top: 16px;
@@ -86,7 +89,7 @@ input.search-btn:hover {
   margin-left: 20%;
 }
 
-.member-view.flex {
+.member-view.flex, .heading.flex{
   justify-content: space-around;
 }
 
