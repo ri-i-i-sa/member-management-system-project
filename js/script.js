@@ -1,4 +1,5 @@
-var api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; 
+const api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; 
+$divsLines = createHeaderDOM ();
 
 fetch(api_url)
 .then(function (fetch_data) {
@@ -13,22 +14,40 @@ for (var i in json) {
     let membersTel = json[i].tel;
     let membersBirthday = birthdayToString(json[i].birthday);
     let membersStatus = getStatusText(json[i].status);
-    
-    let $divsLine = $('<tr class="line">');
-    $divsLine.append($('<td>' + membersId + '</td>'));
-    $divsLine.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
-    $divsLine.append($('<td>' + membersFurigana + '</td>'));
-    $divsLine.append($('<td>' + membersGender + '</td>'));
-    $divsLine.append($('<td>' + membersTel + '</td>'));
-    $divsLine.append($('<td>' + membersBirthday + '</td>'));
-    $divsLine.append($('<td>' + membersStatus + '</td>'));
-    $divsLine.append($('<td>4</td>'));
-    $divsLine.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
+    let $LineDOM = $('<tr class="line">');
 
-    $divsLine.append($('</tr>'));
-    $(".line").append($divsLine);
+    $LineDOM.append($('<td>' + membersId + '</td>'));
+    $LineDOM.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+    $LineDOM.append($('<td>' + membersFurigana + '</td>'));
+    $LineDOM.append($('<td>' + membersGender + '</td>'));
+    $LineDOM.append($('<td>' + membersTel + '</td>'));
+    $LineDOM.append($('<td>' + membersBirthday + '</td>'));
+    $LineDOM.append($('<td>' + membersStatus + '</td>'));
+    $LineDOM.append($('<td>4</td>'));
+    $LineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
+
+    $LineDOM.append($('</tr>'));
+    $divsLines.after($LineDOM);
   }
 });
+$(".member-view").html($divsLines);
+
+function createHeaderDOM () {
+  let $headerDOM = $('<tr class="heading flex">');
+  $headerDOM.append($('<th>ID</th>'));
+  $headerDOM.append($('<th>名前（漢字）</th>'));
+  $headerDOM.append($('<th>名前（ふりがな）</th>'));
+  $headerDOM.append($('<th>性別</th>'));
+  $headerDOM.append($('<th>電話番号</th>'));
+  $headerDOM.append($('<th>誕生日</th>'));
+  $headerDOM.append($('<th>会員ステータス</th>'));
+  $headerDOM.append($('<th>来店回数</th>'));
+  $headerDOM.append($('<th>管理オプション</th>'));
+
+  $headerDOM.append($('</tr>'));
+  return $headerDOM;
+}
+
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
@@ -60,3 +79,4 @@ function birthdayToString(birthdayValue) {
   let formattedDate = year + "/" + month + "/" + day;
   return formattedDate;
 };
+
