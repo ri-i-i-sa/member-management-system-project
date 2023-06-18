@@ -45,9 +45,14 @@ function createHeaderDOM () {
   $headerDOM.append($('<th>管理オプション</th>'));
 
   $headerDOM.append($('</tr>'));
+
   return $headerDOM;
 }
 
+var tableElements = document.getElementsByTagName('table');
+for (var j = 0; j < tableElements.length; j++) {
+  tableElements[j].style.all = 'unset'; 
+}
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
