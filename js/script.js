@@ -16,7 +16,7 @@ fetch(api_url)
       let membersTel = json[i].tel;
       let membersBirthday = birthdayToString(json[i].birthday);
       let membersStatus = getStatusText(json[i].status);
-      let $LineDOM = $('<tr class="line line-row-for-js">');
+      let $LineDOM = $('<tr class="line">');
 
       $LineDOM.append($('<td>' + membersId + '</td>'));
       $LineDOM.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
@@ -38,7 +38,7 @@ $(".member-view").html($divsLines);
 
 
 function createHeaderDOM () {
-  let $headerDOM = $('<tr class="heading flex header-row-for-js">');
+  let $headerDOM = $('<tr class="heading flex">');
   $headerDOM.append($('<th>ID</th>'));
   $headerDOM.append($('<th>名前（漢字）</th>'));
   $headerDOM.append($('<th>名前（ふりがな）</th>'));
@@ -52,11 +52,6 @@ function createHeaderDOM () {
   $headerDOM.append($('</tr>'));
 
   return $headerDOM;
-}
-
-var tableElements = document.getElementsByTagName('table');
-for (var j = 0; j < tableElements.length; j++) {
-  tableElements[j].style.all = 'unset'; 
 }
 
 function getGenderText(genderValue) {

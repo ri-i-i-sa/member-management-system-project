@@ -90,24 +90,7 @@ input.search-btn:hover {
 }
 
 .member-view.flex {
-  justify-content: space-around ;
-}
-
-.header-row-for-js {
-  width: 70%;
-  margin: 0 auto;
-}
-
-tr.line-row-for-js {
-  display: flex;
   justify-content: space-around;
-  align-items: center;
-  margin-left: 14%;
-  margin-right: 14%;
-}
-
-.header-row-for-js.flex {
-  justify-content: space-between;
 }
 
 tr.heading th:not(:first-child) {
@@ -121,10 +104,6 @@ tr.line td:not(:first-child) {
 
 tr.heading th {
   padding-bottom: 20px;
-}
-
-.line {
-  margin: 0 auto ;
 }
 
 
