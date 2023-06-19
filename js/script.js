@@ -1,12 +1,12 @@
 const api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; 
-$divsLines = createHeaderDOM();
+$tableRows = createHeaderDOM();
 
 fetch(api_url)
   .then(function (fetch_data) {
     return fetch_data.json();
   })
   .then(function (json) {
-    var lineDOMArray = []; 
+    let arrayLineDOM = []; 
 
     for (var i in json) {
       let membersId = json[i].id;
@@ -29,12 +29,12 @@ fetch(api_url)
       $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
 
       $lineDOM.append($('</tr>'));
-      lineDOMArray.push($lineDOM); 
+      arrayLineDOM.push($lineDOM); 
     }
 
-    $divsLines.after(lineDOMArray);
+    $tableRows.after(arrayLineDOM);
   });
-$(".member-view").html($divsLines);
+$(".member-view").html($tableRows);
 
 
 function createHeaderDOM() {
