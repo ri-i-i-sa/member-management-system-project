@@ -12,6 +12,10 @@ td,.text-medium {
   font-size: 14px;
 }
 
+tr:nth-child(2n){
+  background-color: #f8f8f8;
+}
+
 th {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 14px;
@@ -93,8 +97,46 @@ input.search-btn:hover {
   justify-content: space-around;
 }
 
-tr.heading th:not(:first-child) {
-  padding-left: 32px;
+.heading {
+  background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
+  padding-bottom: 16px;
+  margin-top: 24px;
+}
+
+.heading.flex {
+  justify-content: last baseline;
+}
+
+.heading th:nth-child(2) {
+  margin-left: 3rem;
+}
+
+.heading th:nth-child(3) {
+  margin-left: 4rem;
+}
+
+.heading th:nth-child(4) {
+  margin-left: 4.2rem;
+}
+
+.heading th:nth-child(5) {
+  margin-left: 5rem;
+}
+
+.heading th:nth-child(6) {
+  margin-left: 5rem;
+}
+
+.heading th:nth-child(7) {
+  margin-left: 2rem;
+}
+
+.heading th:nth-child(8) {
+  margin-left: 2rem;
+}
+
+.heading th:nth-child(9) {
+  margin-left: 4rem;
 }
 
 tr.line td:not(:first-child) {
@@ -106,16 +148,22 @@ tr.heading th {
   padding-bottom: 20px;
 }
 
+tr:first-child,td:first-child {
+  padding-left: 20px;
+}
 
-.heading {
-  background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
-  padding-bottom: 16px;
+.line td {
+  padding-right: 20px; 
 }
 
 .line img {
   margin-left: 10px;
   width: 15px;
   height: 15px;
+}
+
+.line td:nth-child(8) {
+  padding-left: 4rem !important;
 }
 
 .button-date,.button-history {
