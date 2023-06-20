@@ -19,7 +19,7 @@ fetch(api_url)
       let $lineDOM = $('<tr class="line">');
 
       $lineDOM.append($('<td>' + membersId + '</td>'));
-      $lineDOM.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+      $lineDOM.append($('<td>' + membersName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
       $lineDOM.append($('<td>' + membersFurigana + '</td>'));
       $lineDOM.append($('<td>' + membersGender + '</td>'));
       $lineDOM.append($('<td>' + membersTel + '</td>'));
