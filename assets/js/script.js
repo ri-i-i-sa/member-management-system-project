@@ -26,7 +26,7 @@ fetch(api_url)
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium">来店履歴</a></div></div></td>'));
 
       $lineDOM.append($('</tr>'));
       arrayLineDOM.push($lineDOM); 
