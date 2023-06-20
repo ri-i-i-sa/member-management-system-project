@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style_for_history.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet">
+
+  <title>会員管理システム|来店履歴</title>
+</head>
+<body>
+  <main class="bkg">
+    <p class="back-btn">
+      <a href="./index.html">
+        <img src="./assets/img/iconmonstr-angel-left-thin-24.png" alt="">
+        戻る
+      </a>
+    </p>    
+    <div class="member-wrap">
+      <h1>来店履歴</h1>
+      <div class="id-wrap flex">
+        <p class="id-name">ID : </p>
+        <p class="id-number">1</p>
+      </div>
+      <div class="flex">
+        <span class="totaltext">合計金額 <span class="totalprice">¥99,999</span>
+        </span>
+      </div>
+
+      <table class="member-view flex">
+        <tr class="heading flex">
+          <th>予約日時</th>
+          <th>来店日時</th>
+          <th>来店状態</th>
+          <th>支払金額</th>
+        </tr>
+        <tr class="line">
+          <td>2021/02/01/12:30</td>
+          <td>2021/02/01/12:22</td>
+          <td>来店済</td>
+          <td>¥16,000</td>
+        </tr>
+        <tr class="line">
+          <td>2021/02/01/13:30</td>
+          <td>2021/02/01/13:31</td>
+          <td>来店済</td>
+          <td>¥8,000</td>
+        </tr>
+        <tr class="line">
+          <td>2021/04/21/10:00</td>
+          <td>2021/04/21/10:03</td>
+          <td>来店済</td>
+          <td>¥9,800</td>
+        </tr>
+      </table>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>  <script src="./js/api/member-select.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>

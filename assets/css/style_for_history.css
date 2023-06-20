@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  width: 18px;
+  height: 18px;
+  margin-right: 18px;
+}
+
+.back-btn {
+  width: 100px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  margin-top: 24px;
+  margin-left: 22%;
+  align-self: flex-end;
+  cursor: pointer;
+  background-color: #eaeaea;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+}
+
+.back-btn a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.back-btn:hover {
+  background-color: #d5d5d5;
+}
+
+.back-btn:focus {
+  outline: none;
+}
+
+
+h1 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 22%;
+  
+}
+
+h1::before {
+  content: '';
+  width: 3px;
+  height: 40px;
+  background-color: #4AEF82;
+  margin-right: 30px;
+}
+
+p.id-name {
+  margin-top: 24px;
+  margin-left: 22%;
+}
+
+.id-number {
+  margin-left: 10px;
+  align-self: flex-end;
+}
+
+
+td,.text-medium {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+}
+
+tr:nth-child(2n){
+  background-color: #f8f8f8;
+}
+
+th {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  }
+
+span {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.totaltext {
+  margin-left: 63%;
+  font-size: 14px;
+  background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
+
+}
+
+.totalprice {
+  margin-left: 16px;
+}
+
+.flex {
+  display: flex;
+}
+
+.member-view.flex {
+  justify-content: space-around;
+}
+
+.heading {
+  background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
+  padding-bottom: 16px;
+  margin-top: 24px;
+}
+
+.heading.flex {
+  justify-content: last baseline;
+}
+
+.heading th:nth-child(2) {
+  margin-left: 10rem;
+}
+
+.heading th:nth-child(3) {
+  margin-left: 9rem;
+}
+
+.heading th:nth-child(4) {
+  margin-left: 6rem;
+}
+
+tr.line td:not(:first-child) {
+  padding-left: 32px;
+  padding-bottom: 8px;
+}
+
+tr.heading th {
+  padding-bottom: 20px;
+}
+
+tr:first-child,td:first-child {
+  padding-left: 60px;
+}
+
+.line td {
+  padding-right: 80px; 
+}
+

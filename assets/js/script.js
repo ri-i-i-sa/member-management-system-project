@@ -19,14 +19,14 @@ fetch(api_url)
       let $lineDOM = $('<tr class="line">');
 
       $lineDOM.append($('<td>' + membersId + '</td>'));
-      $lineDOM.append($('<td>' + membersName + '<img src="./img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+      $lineDOM.append($('<td>' + membersName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
       $lineDOM.append($('<td>' + membersFurigana + '</td>'));
       $lineDOM.append($('<td>' + membersGender + '</td>'));
       $lineDOM.append($('<td>' + membersTel + '</td>'));
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium">来店履歴</a></div></div></td>'));
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium">来店履歴</a></div></div></td>'));
 
       $lineDOM.append($('</tr>'));
       arrayLineDOM.push($lineDOM); 
