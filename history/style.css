@@ -19,10 +19,16 @@ h1::before {
   margin-right: 30px;
 }
 
-p {
+p.id-name {
   margin-top: 24px;
   margin-left: 22%;
 }
+
+.id-number {
+  margin-left: 10px;
+  align-self: flex-end;
+}
+
 
 td,.text-medium {
   font-family: 'Zen Kaku Gothic New', sans-serif;
