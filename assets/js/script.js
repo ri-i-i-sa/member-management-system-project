@@ -1,7 +1,15 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbxjt3at4c_4Mqb_ykUmUxtCBM6kuTiJLP2hKAe4DOC1LOCh18l6603AIgnjl55sH5EK/exec'; 
+const api_url = 'https://script.google.com/macros/s/AKfycbwreN42eaNf_AHuZepLXrWJLxuIzd14uk4QGo8Ka8Echq3C-oAR9OU-wYieYga4N_vN/exec';
+
+const params = {
+  view: 'members'
+};
+
+const url = new URL(api_url);
+url.search = new URLSearchParams(params).toString();
+
 $tableRows = createHeaderDOM();
 
-fetch(api_url)
+fetch(url)
   .then(function (fetch_data) {
     return fetch_data.json();
   })
