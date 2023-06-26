@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbypHYoHe6azwbfRgCPMAAw_hSRa9SW1yxzJbabdg3cSxRV29ueaJ3VfED16UviYs5uu/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbw361cKavlqOjMfikYoVy9uVPDpMx-RTm2brWRhF0GKsQcLkTPMHmqOTrtJkCi3rZLN/exec';
 
 const params = {
   view: 'members'
