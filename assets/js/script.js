@@ -4,8 +4,11 @@ const params = {
   view: 'members'
 };
 
-const url = new URL(api_url);
-url.search = new URLSearchParams(params).toString();
+let idParams = {};
+
+let url = new URL(api_url);
+let combinedParams = { ...params, ...idParams };
+url.search = new URLSearchParams(combinedParams).toString();
 
 $tableRows = createHeaderDOM();
 
@@ -34,17 +37,28 @@ fetch(url)
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium">来店履歴</a></div></div></td>'));
+      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
+
 
       $lineDOM.append($('</tr>'));
       arrayLineDOM.push($lineDOM); 
     }
 
     $tableRows.after(arrayLineDOM);
+
+    $('.button-history a').on('click', function() {
+      let id = $(this).attr('id');
+      idParams = { id: id };
+      url = new URL(api_url);
+      combinedParams = { ...params, ...idParams };
+      url.search = new URLSearchParams(combinedParams).toString();
+  
+    });
+
   });
 $(".member-view").html($tableRows);
-
-
+  
 function createHeaderDOM() {
   let $headerDOM = $('<tr class="heading flex">');
   $headerDOM.append($('<th>ID</th>'));
@@ -60,6 +74,9 @@ function createHeaderDOM() {
 
   return $headerDOM;
 }
+
+
+
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
