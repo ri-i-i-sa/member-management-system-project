@@ -7,6 +7,15 @@ const params = {
 const url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
+$(document).ready(function() {
+  // URLのクエリパラメーターを取得
+  const params = new URLSearchParams(window.location.search);
+  
+  // idパラメーターを取得して表示
+  const id = params.get('id');
+  console.log(id); // パラメーターの値をコンソールに表示するなど、任意の処理を追加できます
+});
+
 $tableRows = createHeaderDOM();
 
 fetch(url)

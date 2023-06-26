@@ -37,8 +37,8 @@ fetch(url)
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
+      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
 
 
       $lineDOM.append($('</tr>'));
@@ -47,15 +47,21 @@ fetch(url)
 
     $tableRows.after(arrayLineDOM);
 
-    $('.button-history a').on('click', function() {
+    $('.button-history a').on('click', function(e) {
+      e.preventDefault(); // デフォルトのリンク動作をキャンセル
+    
       let id = $(this).attr('id');
       idParams = { id: id };
-      url = new URL(api_url);
+      console.log(idParams);
+    
+      url = new URL("./history.html", window.location.href); // 現在のURLを基準に新しいURLを作成
       combinedParams = { ...params, ...idParams };
       url.search = new URLSearchParams(combinedParams).toString();
-  
+    
+      console.log(url.href); // パラメーターを含めたURLをコンソールに表示
+    
+      window.location.href = url.href; // ページ遷移
     });
-
   });
 $(".member-view").html($tableRows);
   
@@ -74,9 +80,6 @@ function createHeaderDOM() {
 
   return $headerDOM;
 }
-
-
-
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
