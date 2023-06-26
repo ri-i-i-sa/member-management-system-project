@@ -49,13 +49,11 @@ function createHeaderDOM() {
 }
 
 function getArrivalText(arrivalValue) {
-  if (arrivalValue === 0) {
-      return "不来店";
-  } else if (arrivalValue === 1) {
-      return "来店済";
-  } else {
-      return ""; 
-  }
+  if (arrivalValue === 1) {
+    return "済";
+} else {
+    return "未";
+}
 };
 
 function formatAmount(amount) {
