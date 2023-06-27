@@ -1,4 +1,6 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbz1JQINu-RLPQpPBc9AGU11trrm51JPg1oDDyTiAj8MLSGRxZEgyX3veKXR07HTQNH9/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbziG0kBCwC77B7Zr82T1ThhOq7rvULmApC2tt-u-cTI3q-X_E-WNIP9Y9izfFeFF8pq/exec';
+
+$tableRows = createHeaderDOM();
 
 $(document).ready(function() {
   // URLのクエリパラメーターを取得
@@ -19,14 +21,12 @@ $(document).ready(function() {
   
   // APIにリクエストを送信
   fetch(url)
-    .then(function (fetch_data) {
-      return fetch_data.json();
+    .then(function(response) {
+      return response.json();
     })
-    .then(function (json) {
+    .then(function(json) {
       // 取得したデータを処理
       console.log(json);
-
-      $tableRows = createHeaderDOM();
 
       let arrayLineDOM = []; 
 
@@ -47,12 +47,8 @@ $(document).ready(function() {
       }
 
       $tableRows.after(arrayLineDOM);
-      $(".member-view").html($tableRows);
     })
-    .catch(function (error) {
-      // エラーハンドリング
-      console.error(error);
-    });
+    $(".member-view").html($tableRows);
 });
 
 function createHeaderDOM() {
