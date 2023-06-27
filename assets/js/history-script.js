@@ -1,50 +1,59 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbwreN42eaNf_AHuZepLXrWJLxuIzd14uk4QGo8Ka8Echq3C-oAR9OU-wYieYga4N_vN/exec';
-
-const params = {
-  view: 'history'
-};
-
-const url = new URL(api_url);
-url.search = new URLSearchParams(params).toString();
+const api_url = 'https://script.google.com/macros/s/AKfycbz1JQINu-RLPQpPBc9AGU11trrm51JPg1oDDyTiAj8MLSGRxZEgyX3veKXR07HTQNH9/exec';
 
 $(document).ready(function() {
   // URLのクエリパラメーターを取得
-  const params = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search);
   
-  // idパラメーターを取得して表示
-  const id = params.get('id');
-  console.log(id); // パラメーターの値をコンソールに表示するなど、任意の処理を追加できます
+  // idパラメーターを取得
+  const id = urlParams.get('id');
+  
+  // パラメーターを設定
+  const params = {
+    view: 'history',
+    id: id
+  };
+  
+  // URLを構築
+  const url = new URL(api_url);
+  url.search = new URLSearchParams(params).toString();
+  
+  // APIにリクエストを送信
+  fetch(url)
+    .then(function (fetch_data) {
+      return fetch_data.json();
+    })
+    .then(function (json) {
+      // 取得したデータを処理
+      console.log(json);
+
+      $tableRows = createHeaderDOM();
+
+      let arrayLineDOM = []; 
+
+      for (var i in json) {
+        let reserveDate = json[i].reserveAt;
+        let arrivalDate = json[i].arrivalAt;
+        let arrivalCheck = getArrivalText(json[i].arrivalFlag);
+        let paymentTotal = formatAmount(json[i].paymentAmount);
+        let $lineDOM = $('<tr class="line">');
+        
+        $lineDOM.append($('<td>' + reserveDate + '</td>'));
+        $lineDOM.append($('<td>' + arrivalDate + '</td>'));
+        $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
+        $lineDOM.append($('<td>' + paymentTotal + '</td>'));
+
+        $lineDOM.append($('</tr>'));
+        arrayLineDOM.push($lineDOM); 
+      }
+
+      $tableRows.after(arrayLineDOM);
+      $(".member-view").html($tableRows);
+    })
+    .catch(function (error) {
+      // エラーハンドリング
+      console.error(error);
+    });
 });
-
-$tableRows = createHeaderDOM();
-
-fetch(url)
-  .then(function (fetch_data) {
-    return fetch_data.json();
-  })
-  .then(function (json) {
-    let arrayLineDOM = []; 
-
-    for (var i in json) {
-
-    let reserveDate = json[i].reserveAt;
-    let arrivalDate = json[i].arrivalAt;
-    let arrivalCheck = getArrivalText(json[i].arrivalFlag);
-    let paymentTotal = formatAmount(json[i].paymentAmount);
-    let $lineDOM = $('<tr class="line">');
-    
-    $lineDOM.append($('<td>' + reserveDate + '</td>'));
-    $lineDOM.append($('<td>' + arrivalDate + '</td>'));
-    $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
-    $lineDOM.append($('<td>' + paymentTotal + '</td>'));
-
-    $lineDOM.append($('</tr>'));
-    arrayLineDOM.push($lineDOM); 
-
-    $tableRows.after(arrayLineDOM);
-    }
-  });
-$(".member-view").html($tableRows);
 
 function createHeaderDOM() {
   let $headerDOM = $('<tr class="heading flex">');
@@ -57,13 +66,14 @@ function createHeaderDOM() {
   return $headerDOM;
 }
 
+
 function getArrivalText(arrivalValue) {
   if (arrivalValue === 1) {
     return "済";
-} else {
+  } else {
     return "未";
+  }
 }
-};
 
 function formatAmount(amount) {
   const formattedAmount = new Intl.NumberFormat('ja-JP', {
