@@ -1,6 +1,7 @@
 const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
 
 $tableRows = createHeaderDOM();
+$totalAmount = 0;
 
 $(document).ready(function() {
   // URLのクエリパラメーターを取得
@@ -38,6 +39,8 @@ $(document).ready(function() {
         $lineDOM.append($('<td>' + reserveDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
+
+        $totalAmount += (json[i].paymentAmount);
         $lineDOM.append($('<td>' + paymentTotal + '</td>'));
 
         $lineDOM.append($('</tr>'));
@@ -45,6 +48,10 @@ $(document).ready(function() {
       }
 
       $tableRows.after(arrayLineDOM);
+
+      let $totalAmountDOM = $('<span class="totalprice">' + formatAmount($totalAmount) + '</span>');
+      $(".totaltext").html("合計金額: ").append($totalAmountDOM); 
+    
     })
     $(".member-view").html($tableRows);
 });
