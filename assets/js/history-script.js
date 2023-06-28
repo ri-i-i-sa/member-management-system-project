@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbwt5aDmhjNgBkmgxZqubf2wiyROMH1TBUW8XWe5djrdb5Foyq2d-mpS6GiSQ1r_5oPg/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
 
 $tableRows = createHeaderDOM();
 
@@ -6,13 +6,11 @@ $(document).ready(function() {
   // URLのクエリパラメーターを取得
   const urlParams = new URLSearchParams(window.location.search);
   
-  // idパラメーターを取得
-  const id = urlParams.get('id');
   
   // パラメーターを設定
   const params = {
     view: 'history',
-    id: id
+    memberId: urlParams.get('memberId')
   };
   
   // URLを構築

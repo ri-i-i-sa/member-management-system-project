@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbwt5aDmhjNgBkmgxZqubf2wiyROMH1TBUW8XWe5djrdb5Foyq2d-mpS6GiSQ1r_5oPg/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
 
 const params = {
   view: 'members'
@@ -51,7 +51,7 @@ fetch(url)
       e.preventDefault(); // デフォルトのリンク動作をキャンセル
     
       let id = $(this).attr('id');
-      idParams = { id: id };
+      idParams = { memberId: id };
       console.log(idParams);
     
       url = new URL("./history.html", window.location.href); // 現在のURLを基準に新しいURLを作成
