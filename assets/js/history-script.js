@@ -30,7 +30,7 @@ $(document).ready(function() {
     if (json.length === 0) {
       $(".text-for-hide").show();
       $(".member-view").hide();
-
+      $(".totaltext").hide();
     } else {
       $(".text-for-hide").hide();
       let arrayLineDOM = [];
