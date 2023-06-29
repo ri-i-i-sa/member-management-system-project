@@ -10,11 +10,17 @@ $(document).ready(function() {
   // パラメーターを設定
   const params = {
     view: 'history',
-    memberId: urlParams.get('memberId')
+    memberId: urlParams.get('memberId'),
+    memberName: urlParams.get('memberName')
   };
+
+  const memberName = decodeURIComponent(params.memberName);
 
   let $memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
   $(".id-wrap.flex").html($memberIdDOM);
+
+  let $memberNameDOM = $('<p class="member-name">' + decodeURIComponent(params.memberName) + '</p><p>&nbsp;様</p>');
+  $(".name-wrap.flex").html($memberNameDOM);
 
   // URLを構築
   const url = new URL(api_url);

@@ -5,9 +5,10 @@ const params = {
 };
 
 let idParams = {};
+let nameParams = {};
 
 let url = new URL(api_url);
-let combinedParams = { ...params, ...idParams };
+let combinedParams = { ...params, ...idParams,...nameParams };
 url.search = new URLSearchParams(combinedParams).toString();
 
 $tableRows = createHeaderDOM();
@@ -37,8 +38,7 @@ fetch(url)
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
-      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' + membersId + '" data-name="' + membersName + '">来店履歴</a></div></div></td>'));      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
 
 
       $lineDOM.append($('</tr>'));
@@ -51,15 +51,14 @@ fetch(url)
       e.preventDefault(); // デフォルトのリンク動作をキャンセル
     
       let id = $(this).attr('id');
-      idParams = { memberId: id };
-      console.log(idParams);
-    
+      let name = $(this).data('name');
+      let idParams = { memberId: id };
+      let nameParams = { memberName: encodeURIComponent(name) };
+
       url = new URL("./history.html", window.location.href); // 現在のURLを基準に新しいURLを作成
-      combinedParams = { ...params, ...idParams };
+      combinedParams = { ...params, ...idParams,...nameParams };
       url.search = new URLSearchParams(combinedParams).toString();
-    
-      console.log(url.href); // パラメーターを含めたURLをコンソールに表示
-    
+        
       window.location.href = url.href; // ページ遷移
     });
   });
