@@ -26,13 +26,13 @@ $(document).ready(function() {
     return response.json();
   })
   .then(function(json) {
-
     if (json.length === 0) {
-      $(".text-for-hide").show();
       $(".member-view").hide();
       $(".totaltext").hide();
+      $(".text-for-hide").show();
     } else {
       $(".text-for-hide").hide();
+
       let arrayLineDOM = [];
 
       for (var i in json) {
@@ -52,16 +52,15 @@ $(document).ready(function() {
         $lineDOM.append($('</tr>'));
         arrayLineDOM.push($lineDOM);
       }
-
       $tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="totalprice">' + formatAmount($totalAmount) + '</span>');
       $(".totaltext").html("合計金額: ").append($totalAmountDOM);
     }
-  })
-    $(".member-view").html($tableRows);
+  });
+  $(".text-for-hide").hide(); 
+  $(".member-view").html($tableRows);
 });
-
 
 function createHeaderDOM() {
   let $headerDOM = $('<tr class="heading flex">');
@@ -73,7 +72,6 @@ function createHeaderDOM() {
 
   return $headerDOM;
 }
-
 
 function getArrivalText(arrivalValue) {
   if (arrivalValue === 1) {
