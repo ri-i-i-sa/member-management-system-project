@@ -22,14 +22,18 @@ $(document).ready(function() {
   
   // APIにリクエストを送信
   fetch(url)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(json) {
-      // 取得したデータを処理
-      console.log(json);
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
 
-      let arrayLineDOM = []; 
+    if (json.length === 0) {
+      $(".text-for-hide").show();
+      $(".member-view").hide();
+
+    } else {
+      $(".text-for-hide").hide();
+      let arrayLineDOM = [];
 
       for (var i in json) {
         let reserveDate = json[i].reserveAt;
@@ -37,26 +41,27 @@ $(document).ready(function() {
         let arrivalCheck = getArrivalText(json[i].arrivalFlag);
         let paymentTotal = formatAmount(json[i].paymentAmount);
         let $lineDOM = $('<tr class="line">');
-        
+
         $lineDOM.append($('<td>' + reserveDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
 
-        $totalAmount += (json[i].paymentAmount);
+        $totalAmount += json[i].paymentAmount;
         $lineDOM.append($('<td>' + paymentTotal + '</td>'));
 
         $lineDOM.append($('</tr>'));
-        arrayLineDOM.push($lineDOM); 
+        arrayLineDOM.push($lineDOM);
       }
 
       $tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="totalprice">' + formatAmount($totalAmount) + '</span>');
-      $(".totaltext").html("合計金額: ").append($totalAmountDOM); 
-    
-    })
+      $(".totaltext").html("合計金額: ").append($totalAmountDOM);
+    }
+  })
     $(".member-view").html($tableRows);
 });
+
 
 function createHeaderDOM() {
   let $headerDOM = $('<tr class="heading flex">');
