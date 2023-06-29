@@ -7,13 +7,15 @@ $(document).ready(function() {
   // URLのクエリパラメーターを取得
   const urlParams = new URLSearchParams(window.location.search);
   
-  
   // パラメーターを設定
   const params = {
     view: 'history',
     memberId: urlParams.get('memberId')
   };
-  
+
+  let $memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
+  $(".id-wrap.flex").html($memberIdDOM);
+
   // URLを構築
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
