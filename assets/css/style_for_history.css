@@ -54,14 +54,26 @@ h1::before {
   margin-right: 30px;
 }
 
+.member-inf.flex{
+  justify-content: center;
+}
+
+.id-wrap.flex {
+  width: 200px;
+  justify-content: flex-start;
+}
+
 p.id-name {
-  margin-top: 24px;
-  margin-left: 22%;
+  margin-left: 36%;
 }
 
 .id-number {
   margin-left: 10px;
   align-self: flex-end;
+}
+
+.name-wrap {
+  margin-right: 30%;
 }
 
 .text-for-hide {
