@@ -27,6 +27,9 @@ $(document).ready(function() {
   .then(function(json) {
     if (json.length === 0) {
     document.querySelector('.no-history-message').style.display = 'block';
+    $(".member-view").hide();
+    $(".total-text").hide();
+
     } else {
       let arrayLineDOM = [];
 
