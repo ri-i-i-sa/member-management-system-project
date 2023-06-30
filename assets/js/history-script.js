@@ -27,12 +27,8 @@ $(document).ready(function() {
   })
   .then(function(json) {
     if (json.length === 0) {
-      $(".member-view").hide();
-      $(".total-text").hide();
-      $(".no-history-message").show();
+    document.querySelector('.no-history-message').style.display = 'block';
     } else {
-      $(".no-history-message").hide();
-
       let arrayLineDOM = [];
 
       for (var i in json) {
@@ -58,7 +54,6 @@ $(document).ready(function() {
       $(".total-text").html("合計金額: ").append($totalAmountDOM);
     }
   });
-  $(".no-history-message").hide(); 
   $(".member-view").html($tableRows);
 });
 
