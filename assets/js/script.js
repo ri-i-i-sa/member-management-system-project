@@ -47,10 +47,10 @@ fetch(url)
       params.memberId = id;
       params.memberName = encodeURIComponent(name);
 
-      let redirectURL = new URL("./history.html", window.location.href);
-      redirectURL.search = new URLSearchParams(params).toString();
+      let targetURL = new URL("./history.html", window.location.href);
+      targetURL.search = new URLSearchParams(params).toString();
 
-      window.location.href = redirectURL.href;
+      window.location.href = targetURL.href;
     });
   });
 
