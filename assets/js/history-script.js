@@ -5,7 +5,6 @@ $totalAmount = 0;
 
 $(document).ready(function() {
   const urlParams = new URLSearchParams(window.location.search);
-  const memberName = decodeURIComponent(urlParams.get('memberName'));
   
   const params = {
     view: 'history',
@@ -15,7 +14,7 @@ $(document).ready(function() {
   let $memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
   $(".id-wrap.flex").html($memberIdDOM);
 
-  let $memberNameDOM = $('<p class="member-name">' + memberName + '</p><p>&nbsp;様</p>');
+  let $memberNameDOM = $('<p class="member-name">' + decodeURIComponent(urlParams.get('memberName')) + '</p><p>&nbsp;様</p>');
   $(".name-wrap.flex").html($memberNameDOM);
 
   const url = new URL(api_url);
