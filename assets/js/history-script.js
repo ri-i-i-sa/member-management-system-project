@@ -28,10 +28,10 @@ $(document).ready(function() {
   .then(function(json) {
     if (json.length === 0) {
       $(".member-view").hide();
-      $(".totaltext").hide();
-      $(".text-for-hide").show();
+      $(".total-text").hide();
+      $(".no-history-message").show();
     } else {
-      $(".text-for-hide").hide();
+      $(".no-history-message").hide();
 
       let arrayLineDOM = [];
 
@@ -45,20 +45,20 @@ $(document).ready(function() {
         $lineDOM.append($('<td>' + reserveDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalDate + '</td>'));
         $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
-
-        $totalAmount += json[i].paymentAmount;
         $lineDOM.append($('<td>' + paymentTotal + '</td>'));
 
         $lineDOM.append($('</tr>'));
+
         arrayLineDOM.push($lineDOM);
+        $totalAmount += json[i].paymentAmount;
       }
       $tableRows.after(arrayLineDOM);
 
-      let $totalAmountDOM = $('<span class="totalprice">' + formatAmount($totalAmount) + '</span>');
-      $(".totaltext").html("合計金額: ").append($totalAmountDOM);
+      let $totalAmountDOM = $('<span class="total-price">' + formatAmount($totalAmount) + '</span>');
+      $(".total-text").html("合計金額: ").append($totalAmountDOM);
     }
   });
-  $(".text-for-hide").hide(); 
+  $(".no-history-message").hide(); 
   $(".member-view").html($tableRows);
 });
 

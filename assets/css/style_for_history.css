@@ -76,7 +76,7 @@ p.id-name {
   margin-right: 30%;
 }
 
-.text-for-hide {
+.no-history-message {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 18px;
   text-align: center;
@@ -106,14 +106,14 @@ span {
   margin-bottom: 24px;
 }
 
-.totaltext {
+.total-text {
   margin-left: 63%;
   font-size: 14px;
   background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
 
 }
 
-.totalprice {
+.total-price {
   margin-left: 16px;
 }
 

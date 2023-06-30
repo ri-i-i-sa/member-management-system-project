@@ -37,8 +37,8 @@ fetch(url)
       $lineDOM.append($('<td>' + membersBirthday + '</td>'));
       $lineDOM.append($('<td>' + membersStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' + membersId + '" data-name="' + membersName + '">来店履歴</a></div></div></td>'));      // $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="#" class="text-medium" id="'+ membersId +'">来店履歴</a></div></div></td>'));
-
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' 
+                        + membersId + '" data-name="' + membersName + '">来店履歴</a></div></div></td>'));  
       $lineDOM.append($('</tr>'));
       arrayLineDOM.push($lineDOM); 
     }
@@ -50,14 +50,13 @@ fetch(url)
     
       let id = $(this).attr('id');
       let name = $(this).data('name');
-      let idParams = { memberId: id };
-      let nameParams = { memberName: encodeURIComponent(name) };
+      params.memberId = id;
+      params.memberName = encodeURIComponent(name);
 
-      url = new URL("./history.html", window.location.href); 
-      combinedParams = { ...params, ...idParams,...nameParams };
-      url.search = new URLSearchParams(combinedParams).toString();
+      let redirectURL = new URL("./history.html", window.location.href); 
+      redirectURL.search = new URLSearchParams(params).toString();
         
-      window.location.href = url.href; 
+      window.location.href = redirectURL.href; 
     });
   });
 $(".member-view").html($tableRows);
