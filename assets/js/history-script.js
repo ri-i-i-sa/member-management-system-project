@@ -4,29 +4,23 @@ $tableRows = createHeaderDOM();
 $totalAmount = 0;
 
 $(document).ready(function() {
-  // URLのクエリパラメーターを取得
   const urlParams = new URLSearchParams(window.location.search);
+  const memberName = decodeURIComponent(urlParams.get('memberName'));
   
-  // パラメーターを設定
   const params = {
     view: 'history',
     memberId: urlParams.get('memberId'),
-    memberName: urlParams.get('memberName')
   };
-
-  const memberName = decodeURIComponent(params.memberName);
 
   let $memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
   $(".id-wrap.flex").html($memberIdDOM);
 
-  let $memberNameDOM = $('<p class="member-name">' + decodeURIComponent(params.memberName) + '</p><p>&nbsp;様</p>');
+  let $memberNameDOM = $('<p class="member-name">' + memberName + '</p><p>&nbsp;様</p>');
   $(".name-wrap.flex").html($memberNameDOM);
 
-  // URLを構築
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
   
-  // APIにリクエストを送信
   fetch(url)
   .then(function(response) {
     return response.json();
