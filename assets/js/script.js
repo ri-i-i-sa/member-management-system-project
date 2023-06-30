@@ -13,54 +13,49 @@ url.search = new URLSearchParams(params).toString();
 $tableRows = createHeaderDOM();
 
 fetch(url)
-  .then(function (fetch_data) {
+  .then(function(fetch_data) {
     return fetch_data.json();
   })
-  .then(function (json) {
-    let arrayLineDOM = []; 
+  .then(function(json) {
+    let arrayLineDOM = [];
 
     for (var i in json) {
-      let membersId = json[i].id;
-      let membersName = json[i].name;
-      let membersFurigana = json[i].furigana;
-      let membersGender = getGenderText(json[i].gender);
-      let membersTel = json[i].tel;
-      let membersBirthday = birthdayToString(json[i].birthday);
-      let membersStatus = getStatusText(json[i].status);
+      let memberInfo = jsonToDictionary(json[i]);
       let $lineDOM = $('<tr class="line">');
 
-      $lineDOM.append($('<td>' + membersId + '</td>'));
-      $lineDOM.append($('<td>' + membersName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
-      $lineDOM.append($('<td>' + membersFurigana + '</td>'));
-      $lineDOM.append($('<td>' + membersGender + '</td>'));
-      $lineDOM.append($('<td>' + membersTel + '</td>'));
-      $lineDOM.append($('<td>' + membersBirthday + '</td>'));
-      $lineDOM.append($('<td>' + membersStatus + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
+      $lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
       $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' 
-                        + membersId + '" data-name="' + membersName + '">来店履歴</a></div></div></td>'));  
+      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
+        memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
       $lineDOM.append($('</tr>'));
-      arrayLineDOM.push($lineDOM); 
+      arrayLineDOM.push($lineDOM);
     }
 
     $tableRows.after(arrayLineDOM);
 
     $('.button-history a').on('click', function(e) {
-      e.preventDefault(); 
-    
+      e.preventDefault();
+
       let id = $(this).attr('id');
       let name = $(this).data('name');
       params.memberId = id;
       params.memberName = encodeURIComponent(name);
 
-      let redirectURL = new URL("./history.html", window.location.href); 
+      let redirectURL = new URL("./history.html", window.location.href);
       redirectURL.search = new URLSearchParams(params).toString();
-        
-      window.location.href = redirectURL.href; 
+
+      window.location.href = redirectURL.href;
     });
   });
+
 $(".member-view").html($tableRows);
-  
+
 function createHeaderDOM() {
   let $headerDOM = $('<tr class="heading flex">');
   $headerDOM.append($('<th>ID</th>'));
@@ -75,6 +70,18 @@ function createHeaderDOM() {
   $headerDOM.append($('</tr>'));
 
   return $headerDOM;
+}
+
+function jsonToDictionary(json) {
+  return {
+    memberId: json.id,
+    memberName: json.name,
+    memberFurigana: json.furigana,
+    memberGender: getGenderText(json.gender),
+    memberTel: json.tel,
+    memberBirthday: birthdayToString(json.birthday),
+    memberStatus: getStatusText(json.status)
+  };
 }
 
 function getGenderText(genderValue) {
