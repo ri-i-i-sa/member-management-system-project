@@ -26,14 +26,13 @@ $(document).ready(function() {
   })
   .then(function(json) {
     if (json.length === 0) {
-    // document.querySelector('.no-history-message').style.display = 'block';
-    document.getElementsByClassName(".no-history-message").hidden = false;
+    $(".no-history-message").show();
     $(".member-view").hide();
     $(".total-text").hide();
 
+
     } else {
       let arrayLineDOM = [];
-
       for (var i in json) {
         let lineDOM = $('<tr class="line">');
 
@@ -46,8 +45,6 @@ $(document).ready(function() {
 
         arrayLineDOM.push(lineDOM);
         $totalAmount += json[i].paymentAmount;
-
-        document.getElementsByClassName(".no-history-message").hidden = true;
       }
       $tableRows.after(arrayLineDOM);
 
