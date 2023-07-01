@@ -35,16 +35,12 @@ $(document).ready(function() {
       let arrayLineDOM = [];
 
       for (var i in json) {
-        let reserveDate = json[i].reserveAt;
-        let arrivalDate = json[i].arrivalAt;
-        let arrivalCheck = getArrivalText(json[i].arrivalFlag);
-        let paymentTotal = formatAmount(json[i].paymentAmount);
         let $lineDOM = $('<tr class="line">');
 
-        $lineDOM.append($('<td>' + reserveDate + '</td>'));
-        $lineDOM.append($('<td>' + arrivalDate + '</td>'));
-        $lineDOM.append($('<td>' + arrivalCheck + '</td>'));
-        $lineDOM.append($('<td>' + paymentTotal + '</td>'));
+        $lineDOM.append($('<td>' + json[i].reserveAt + '</td>'));
+        $lineDOM.append($('<td>' + json[i].arrivalAt + '</td>'));
+        $lineDOM.append($('<td>' + getArrivalText(json[i].arrivalFlag) + '</td>'));
+        $lineDOM.append($('<td>' + formatAmount(json[i].paymentAmount) + '</td>'));
 
         $lineDOM.append($('</tr>'));
 
