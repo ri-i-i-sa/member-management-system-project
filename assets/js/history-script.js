@@ -27,11 +27,10 @@ $(document).ready(function() {
   .then(function(json) {
     if (json.length === 0) {
     $(".no-history-message").show();
-    $(".member-view").hide();
-    $(".total-text").hide();
-
 
     } else {
+      $(".heading.flex").show();
+      $(".total-text").show();
       let arrayLineDOM = [];
       for (var i in json) {
         let lineDOM = $('<tr class="line">');
@@ -53,10 +52,12 @@ $(document).ready(function() {
     }
   });
   $(".member-view").html($tableRows);
+
+  $(".heading.flex").hide();
 });
 
 function createHeaderDOM() {
-  let headerDOM = $('<tr class="heading flex">');
+  let headerDOM = $('<tr class="heading flex" hidden>');
   headerDOM.append($('<th>予約日時</th>'));
   headerDOM.append($('<th>来店日時</th>'));
   headerDOM.append($('<th>来店状態</th>'));
