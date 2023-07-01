@@ -21,20 +21,20 @@ fetch(url)
 
     for (var i in json) {
       let memberInfo = jsonToDictionary(json[i]);
-      let $lineDOM = $('<tr class="line">');
+      let lineDOM = $('<tr class="line">');
 
-      $lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
-      $lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
-      $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
+      lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+      lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
+      lineDOM.append($('<td>4</td>'));
+      lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
         memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
-      $lineDOM.append($('</tr>'));
-      arrayLineDOM.push($lineDOM);
+      lineDOM.append($('</tr>'));
+      arrayLineDOM.push(lineDOM);
     }
 
     $tableRows.after(arrayLineDOM);
@@ -57,19 +57,19 @@ fetch(url)
 $(".member-view").html($tableRows);
 
 function createHeaderDOM() {
-  let $headerDOM = $('<tr class="heading flex">');
-  $headerDOM.append($('<th>ID</th>'));
-  $headerDOM.append($('<th>名前（漢字）</th>'));
-  $headerDOM.append($('<th>名前（ふりがな）</th>'));
-  $headerDOM.append($('<th>性別</th>'));
-  $headerDOM.append($('<th>電話番号</th>'));
-  $headerDOM.append($('<th>誕生日</th>'));
-  $headerDOM.append($('<th>会員ステータス</th>'));
-  $headerDOM.append($('<th>来店回数</th>'));
-  $headerDOM.append($('<th>管理オプション</th>'));
-  $headerDOM.append($('</tr>'));
+  let headerDOM = $('<tr class="heading flex">');
+  headerDOM.append($('<th>ID</th>'));
+  headerDOM.append($('<th>名前（漢字）</th>'));
+  headerDOM.append($('<th>名前（ふりがな）</th>'));
+  headerDOM.append($('<th>性別</th>'));
+  headerDOM.append($('<th>電話番号</th>'));
+  headerDOM.append($('<th>誕生日</th>'));
+  headerDOM.append($('<th>会員ステータス</th>'));
+  headerDOM.append($('<th>来店回数</th>'));
+  headerDOM.append($('<th>管理オプション</th>'));
+  headerDOM.append($('</tr>'));
 
-  return $headerDOM;
+  return headerDOM;
 }
 
 function jsonToDictionary(json) {

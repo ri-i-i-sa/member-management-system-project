@@ -35,16 +35,16 @@ $(document).ready(function() {
       let arrayLineDOM = [];
 
       for (var i in json) {
-        let $lineDOM = $('<tr class="line">');
+        let lineDOM = $('<tr class="line">');
 
-        $lineDOM.append($('<td>' + json[i].reserveAt + '</td>'));
-        $lineDOM.append($('<td>' + json[i].arrivalAt + '</td>'));
-        $lineDOM.append($('<td>' + getArrivalText(json[i].arrivalFlag) + '</td>'));
-        $lineDOM.append($('<td>' + formatAmount(json[i].paymentAmount) + '</td>'));
+        lineDOM.append($('<td>' + json[i].reserveAt + '</td>'));
+        lineDOM.append($('<td>' + json[i].arrivalAt + '</td>'));
+        lineDOM.append($('<td>' + getArrivalText(json[i].arrivalFlag) + '</td>'));
+        lineDOM.append($('<td>' + formatAmount(json[i].paymentAmount) + '</td>'));
 
-        $lineDOM.append($('</tr>'));
+        lineDOM.append($('</tr>'));
 
-        arrayLineDOM.push($lineDOM);
+        arrayLineDOM.push(lineDOM);
         $totalAmount += json[i].paymentAmount;
 
         document.getElementsByClassName(".no-history-message").hidden = true;
@@ -59,14 +59,14 @@ $(document).ready(function() {
 });
 
 function createHeaderDOM() {
-  let $headerDOM = $('<tr class="heading flex">');
-  $headerDOM.append($('<th>予約日時</th>'));
-  $headerDOM.append($('<th>来店日時</th>'));
-  $headerDOM.append($('<th>来店状態</th>'));
-  $headerDOM.append($('<th>支払金額</th>'));
-  $headerDOM.append($('</tr>'));
+  let headerDOM = $('<tr class="heading flex">');
+  headerDOM.append($('<th>予約日時</th>'));
+  headerDOM.append($('<th>来店日時</th>'));
+  headerDOM.append($('<th>来店状態</th>'));
+  headerDOM.append($('<th>支払金額</th>'));
+  headerDOM.append($('</tr>'));
 
-  return $headerDOM;
+  return headerDOM;
 }
 
 function getArrivalText(arrivalValue) {
