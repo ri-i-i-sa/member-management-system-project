@@ -26,12 +26,12 @@ $(document).ready(function() {
   })
   .then(function(json) {
     if (json.length === 0) {
+    // document.querySelector('.no-history-message').style.display = 'block';
     document.getElementsByClassName(".no-history-message").hidden = false;
     $(".member-view").hide();
     $(".total-text").hide();
 
     } else {
-      document.getElementsByClassName(".no-history-message").hidden = true;
       let arrayLineDOM = [];
 
       for (var i in json) {
@@ -50,6 +50,8 @@ $(document).ready(function() {
 
         arrayLineDOM.push($lineDOM);
         $totalAmount += json[i].paymentAmount;
+
+        document.getElementsByClassName(".no-history-message").hidden = true;
       }
       $tableRows.after(arrayLineDOM);
 
