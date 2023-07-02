@@ -19,7 +19,6 @@ $(document).ready(function() {
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
 
-  totalAmount = 0;
   
   fetch(url)
   .then(function(response) {
@@ -33,6 +32,8 @@ $(document).ready(function() {
       $(".heading.flex").show();
       $(".total-text").show();
       let arrayLineDOM = [];
+      let totalAmount = 0;
+      
       for (var i in json) {
         let lineDOM = $('<tr class="line">');
 
