@@ -54,14 +54,32 @@ h1::before {
   margin-right: 30px;
 }
 
+.member-inf.flex{
+  justify-content: center;
+}
+
+.id-wrap.flex {
+  width: 200px;
+  justify-content: flex-start;
+}
+
 p.id-name {
-  margin-top: 24px;
-  margin-left: 22%;
+  margin-left: 36%;
 }
 
 .id-number {
   margin-left: 10px;
   align-self: flex-end;
+}
+
+.name-wrap {
+  margin-right: 30%;
+}
+
+.no-history-message {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 18px;
+  text-align: center;
 }
 
 
@@ -88,14 +106,14 @@ span {
   margin-bottom: 24px;
 }
 
-.totaltext {
+.total-text {
   margin-left: 63%;
   font-size: 14px;
   background-image: linear-gradient( rgba(0, 0, 0, 0) 90%, #7B7979 90%, #7B7979 95%, rgba(0, 0, 0, 0) 95% );
 
 }
 
-.totalprice {
+.total-price {
   margin-left: 16px;
 }
 

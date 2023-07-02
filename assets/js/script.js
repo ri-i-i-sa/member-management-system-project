@@ -1,64 +1,84 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbwreN42eaNf_AHuZepLXrWJLxuIzd14uk4QGo8Ka8Echq3C-oAR9OU-wYieYga4N_vN/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
 
 const params = {
   view: 'members'
 };
 
-const url = new URL(api_url);
+let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
 $tableRows = createHeaderDOM();
 
 fetch(url)
-  .then(function (fetch_data) {
+  .then(function(fetch_data) {
     return fetch_data.json();
   })
-  .then(function (json) {
-    let arrayLineDOM = []; 
+  .then(function(json) {
+    let arrayLineDOM = [];
 
     for (var i in json) {
-      let membersId = json[i].id;
-      let membersName = json[i].name;
-      let membersFurigana = json[i].furigana;
-      let membersGender = getGenderText(json[i].gender);
-      let membersTel = json[i].tel;
-      let membersBirthday = birthdayToString(json[i].birthday);
-      let membersStatus = getStatusText(json[i].status);
-      let $lineDOM = $('<tr class="line">');
+      let memberInfo = jsonToDictionary(json[i]);
+      let lineDOM = $('<tr class="line">');
 
-      $lineDOM.append($('<td>' + membersId + '</td>'));
-      $lineDOM.append($('<td>' + membersName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
-      $lineDOM.append($('<td>' + membersFurigana + '</td>'));
-      $lineDOM.append($('<td>' + membersGender + '</td>'));
-      $lineDOM.append($('<td>' + membersTel + '</td>'));
-      $lineDOM.append($('<td>' + membersBirthday + '</td>'));
-      $lineDOM.append($('<td>' + membersStatus + '</td>'));
-      $lineDOM.append($('<td>4</td>'));
-      $lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium">来店履歴</a></div></div></td>'));
-
-      $lineDOM.append($('</tr>'));
-      arrayLineDOM.push($lineDOM); 
+      lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+      lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
+      lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
+      lineDOM.append($('<td>4</td>'));
+      lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
+        memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+      lineDOM.append($('</tr>'));
+      arrayLineDOM.push(lineDOM);
     }
 
     $tableRows.after(arrayLineDOM);
+
+    $('.button-history a').on('click', function(e) {
+      e.preventDefault();
+
+      let id = $(this).attr('id');
+      let name = $(this).data('name');
+      params.memberId = id;
+      params.memberName = encodeURIComponent(name);
+
+      let targetURL = new URL("./history.html", window.location.href);
+      targetURL.search = new URLSearchParams(params).toString();
+
+      window.location.href = targetURL.href;
+    });
   });
+
 $(".member-view").html($tableRows);
 
-
 function createHeaderDOM() {
-  let $headerDOM = $('<tr class="heading flex">');
-  $headerDOM.append($('<th>ID</th>'));
-  $headerDOM.append($('<th>名前（漢字）</th>'));
-  $headerDOM.append($('<th>名前（ふりがな）</th>'));
-  $headerDOM.append($('<th>性別</th>'));
-  $headerDOM.append($('<th>電話番号</th>'));
-  $headerDOM.append($('<th>誕生日</th>'));
-  $headerDOM.append($('<th>会員ステータス</th>'));
-  $headerDOM.append($('<th>来店回数</th>'));
-  $headerDOM.append($('<th>管理オプション</th>'));
-  $headerDOM.append($('</tr>'));
+  let headerDOM = $('<tr class="heading flex">');
+  headerDOM.append($('<th>ID</th>'));
+  headerDOM.append($('<th>名前（漢字）</th>'));
+  headerDOM.append($('<th>名前（ふりがな）</th>'));
+  headerDOM.append($('<th>性別</th>'));
+  headerDOM.append($('<th>電話番号</th>'));
+  headerDOM.append($('<th>誕生日</th>'));
+  headerDOM.append($('<th>会員ステータス</th>'));
+  headerDOM.append($('<th>来店回数</th>'));
+  headerDOM.append($('<th>管理オプション</th>'));
+  headerDOM.append($('</tr>'));
 
-  return $headerDOM;
+  return headerDOM;
+}
+
+function jsonToDictionary(json) {
+  return {
+    memberId: json.id,
+    memberName: json.name,
+    memberFurigana: json.furigana,
+    memberGender: getGenderText(json.gender),
+    memberTel: json.tel,
+    memberBirthday: birthdayToString(json.birthday),
+    memberStatus: getStatusText(json.status)
+  };
 }
 
 function getGenderText(genderValue) {
