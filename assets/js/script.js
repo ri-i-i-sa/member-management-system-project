@@ -1,7 +1,7 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbzrDp-YLsNwsTonjesoamjuwaKDXccVrhcr9d1guQVH_z3vEx1jRYBmESnqFGRmINlc/exec';
 
 const params = {
-  view: 'members'
+  view: 'members',
 };
 
 let url = new URL(api_url);
@@ -68,6 +68,21 @@ function createHeaderDOM() {
 
   return headerDOM;
 }
+
+$('.search-btn.text-medium').on('click', function(e) {
+  e.preventDefault();
+
+  let id = 1; 
+
+  $(this).attr('id', id); 
+
+  let targetURL = new URL(window.location.href);
+  targetURL.searchParams.set('view', params.view);
+  targetURL.searchParams.set('id', id);
+
+  window.location.href = targetURL.href;
+});
+
 
 function jsonToDictionary(json) {
   return {
