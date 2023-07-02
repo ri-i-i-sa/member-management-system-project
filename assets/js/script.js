@@ -1,3 +1,17 @@
+const urlParams = new URLSearchParams(window.location.search);
+const view = urlParams.get('view');
+const id = urlParams.get('id');
+
+var restURL = new URL(window.location.href);
+restURL.searchParams.delete('view');
+restURL.searchParams.delete('id');
+history.replaceState(null, null, restURL.pathname);
+
+console.log(view);
+console.log(id);
+
+
+
 const api_url = 'https://script.google.com/macros/s/AKfycbzrDp-YLsNwsTonjesoamjuwaKDXccVrhcr9d1guQVH_z3vEx1jRYBmESnqFGRmINlc/exec';
 
 const params = {
