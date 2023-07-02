@@ -48,8 +48,8 @@ $(document).ready(function() {
       }
       tableRows.after(arrayLineDOM);
 
-      let $totalAmountDOM = $('<span class="total-price">' + formatAmount($totalAmount) + '</span>');
-      $(".total-text").html("合計金額: ").append($totalAmountDOM);
+      let $totalAmountDOM = $('<span class="total-price">' + formatAmount(totalAmount) + '</span>');
+      $(".total-text").append($totalAmountDOM);
     }
   });
   $(".member-view").html(tableRows);
