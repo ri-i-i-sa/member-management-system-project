@@ -4,9 +4,6 @@ const params = {
   view: 'members'
 };
 
-let idParams = {};
-let nameParams = {};
-
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 

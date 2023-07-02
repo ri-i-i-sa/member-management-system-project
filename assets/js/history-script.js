@@ -1,7 +1,6 @@
 const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
 
-$tableRows = createHeaderDOM();
-$totalAmount = 0;
+tableRows = createHeaderDOM();
 
 $(document).ready(function() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -11,14 +10,16 @@ $(document).ready(function() {
     memberId: urlParams.get('memberId'),
   };
 
-  let $memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
-  $(".id-wrap.flex").html($memberIdDOM);
+  let memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
+  $(".id-wrap.flex").html(memberIdDOM);
 
-  let $memberNameDOM = $('<p class="member-name">' + decodeURIComponent(urlParams.get('memberName')) + '</p><p>&nbsp;様</p>');
-  $(".name-wrap.flex").html($memberNameDOM);
+  let memberNameDOM = $('<p class="member-name">' + decodeURIComponent(urlParams.get('memberName')) + '</p><p>&nbsp;様</p>');
+  $(".name-wrap.flex").html(memberNameDOM);
 
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
+
+  totalAmount = 0;
   
   fetch(url)
   .then(function(response) {
@@ -43,15 +44,15 @@ $(document).ready(function() {
         lineDOM.append($('</tr>'));
 
         arrayLineDOM.push(lineDOM);
-        $totalAmount += json[i].paymentAmount;
+        totalAmount += json[i].paymentAmount;
       }
-      $tableRows.after(arrayLineDOM);
+      tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="total-price">' + formatAmount($totalAmount) + '</span>');
       $(".total-text").html("合計金額: ").append($totalAmountDOM);
     }
   });
-  $(".member-view").html($tableRows);
+  $(".member-view").html(tableRows);
 
   $(".heading.flex").hide();
 });
