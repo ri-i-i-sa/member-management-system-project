@@ -69,18 +69,20 @@ function createHeaderDOM() {
   return headerDOM;
 }
 
+
 $('.search-btn.text-medium').on('click', function(e) {
   e.preventDefault();
 
-  let id = 1; 
-
-  $(this).attr('id', id); 
+  let id = 1;
+  let view = params.view;
 
   let targetURL = new URL(window.location.href);
-  targetURL.searchParams.set('view', params.view);
+  targetURL.searchParams.set('view', view);
   targetURL.searchParams.set('id', id);
 
-  window.location.href = targetURL.href;
+  let newURL = targetURL.href; 
+
+  window.location.assign(newURL);
 });
 
 
