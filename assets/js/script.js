@@ -39,8 +39,10 @@ fetch(url)
 
     $('.search-btn.text-medium').on('click', function(e) {
       e.preventDefault();
-    
+
       let arrayLineDOM = [];
+      let isEmptySearch = true; 
+    
       for (var i in json) {
 
         lineDOM = $('<tr class="line">');
@@ -50,13 +52,18 @@ fetch(url)
         let searchTel = $(".search-tel").val();
         let searchStatus = $("input[name='status']:checked").val();
 
-    
-        if ((searchId && json[i].id.toString() === searchId) ||
+        if (searchId || searchName || searchFurigana || searchTel) {
+          isEmptySearch = false;
+        }
+      
+        if (searchStatus === "unspecified" && isEmptySearch) {
+          arrayLineDOM = json.map(createTableDataDOM);
+          } else if ((searchId && json[i].id.toString() === searchId) ||
             (searchName && json[i].name.includes(searchName)) ||
             (searchFurigana && json[i].furigana.includes(searchFurigana)) ||
             (searchTel && json[i].tel.includes(searchTel)) ||
             (json[i].status === statusValueToNumber(searchStatus)) 
-            ){
+          ){
           arrayLineDOM.push(createTableDataDOM(json[i]));
         }
       }
@@ -147,7 +154,7 @@ function birthdayToString(birthdayValue) {
 
 function statusValueToNumber(inputValue) {
   if (inputValue === "unspecified") {
-    return [0, 1];
+    return "";
   } else if (inputValue === "general") {
     return 0;
   } else if (inputValue === "vip") {
