@@ -17,10 +17,9 @@ fetch(url)
     let arrayLineDOM = [];
 
     for (var i in json) {
-      let lineDOM = createTableDataDOM(json[i]);
+      lineDOM = createTableDataDOM(json[i]);
       arrayLineDOM.push(lineDOM);
     }
-
 
     $tableRows.after(arrayLineDOM);
 
@@ -41,19 +40,24 @@ fetch(url)
     $('.search-btn.text-medium').on('click', function(e) {
       let arrayLineDOM = [];
       for (var i in json) {
-        let lineDOM = $('<tr class="line">');
+        lineDOM = $('<tr class="line">');
         let searchId = $(".search-id").val();
         let searchName = $(".search-name").val();
+        let searchFurigana = $(".search-furigana").val();
+        let searchTel = $(".search-tel").val();
     
-        if (json[i].id.toString() === searchId || json[i].name === searchName){
+        if ((searchId && json[i].id.toString() === searchId) ||
+            (searchName && json[i].name.includes(searchName)) ||
+            (searchFurigana && json[i].furigana.includes(searchFurigana)) ||
+            (searchTel && json[i].tel.includes(searchTel))) {
           arrayLineDOM.push(createTableDataDOM(json[i]));
         }
       }
-    
       $(".member-view").html($tableRows);
     
       $tableRows.after(arrayLineDOM);
     });
+    
   });
 
 $(".member-view").html($tableRows);
