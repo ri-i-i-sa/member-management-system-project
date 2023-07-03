@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbzrDp-YLsNwsTonjesoamjuwaKDXccVrhcr9d1guQVH_z3vEx1jRYBmESnqFGRmINlc/exec';
 
 const params = {
   view: 'members'
@@ -17,22 +17,10 @@ fetch(url)
     let arrayLineDOM = [];
 
     for (var i in json) {
-      let memberInfo = jsonToDictionary(json[i]);
-      let lineDOM = $('<tr class="line">');
-
-      lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
-      lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
-      lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
-      lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
-      lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
-      lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
-      lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
-      lineDOM.append($('<td>4</td>'));
-      lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
-        memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
-      lineDOM.append($('</tr>'));
+      let lineDOM = createTableDataDOM(json[i]);
       arrayLineDOM.push(lineDOM);
     }
+
 
     $tableRows.after(arrayLineDOM);
 
@@ -49,9 +37,44 @@ fetch(url)
 
       window.location.href = targetURL.href;
     });
+
+    $('.search-btn.text-medium').on('click', function(e) {
+      let arrayLineDOM = [];
+      for (var i in json) {
+        let lineDOM = $('<tr class="line">');
+        let searchId = $(".search-id").val();
+        let searchName = $(".search-name").val();
+    
+        if (json[i].id.toString() === searchId || json[i].name === searchName){
+          arrayLineDOM.push(createTableDataDOM(json[i]));
+        }
+      }
+    
+      $(".member-view").html($tableRows);
+    
+      $tableRows.after(arrayLineDOM);
+    });
   });
 
 $(".member-view").html($tableRows);
+
+
+function createTableDataDOM(memberJson){
+  let lineDOM = $('<tr class="line">')
+  let memberInfo = jsonToDictionary(memberJson);
+  lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
+  lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
+  lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
+  lineDOM.append($('<td>' + memberInfo.memberGender + '</td>'));
+  lineDOM.append($('<td>' + memberInfo.memberTel + '</td>'));
+  lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
+  lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
+  lineDOM.append($('<td>4</td>'));
+  lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
+    memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+  lineDOM.append($('</tr>'));
+  return lineDOM;
+}
 
 function createHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
