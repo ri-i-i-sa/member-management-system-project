@@ -42,12 +42,14 @@ fetch(url)
     
       let arrayLineDOM = [];
       for (var i in json) {
+
         lineDOM = $('<tr class="line">');
-        let searchId = $("#search-id").val();
-        let searchName = $("#search-name").val();
-        let searchFurigana = $("#search-furigana").val();
-        let searchTel = $("#search-tel").val();
+        let searchId = $(".search-id").val();
+        let searchName = $(".search-name").val();
+        let searchFurigana = $(".search-furigana").val();
+        let searchTel = $(".search-tel").val();
         let searchStatus = $("input[name='status']:checked").val();
+
     
         if ((searchId && json[i].id.toString() === searchId) ||
             (searchName && json[i].name.includes(searchName)) ||
