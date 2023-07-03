@@ -38,18 +38,23 @@ fetch(url)
     });
 
     $('.search-btn.text-medium').on('click', function(e) {
+      e.preventDefault();
+    
       let arrayLineDOM = [];
       for (var i in json) {
         lineDOM = $('<tr class="line">');
-        let searchId = $(".search-id").val();
-        let searchName = $(".search-name").val();
-        let searchFurigana = $(".search-furigana").val();
-        let searchTel = $(".search-tel").val();
+        let searchId = $("#search-id").val();
+        let searchName = $("#search-name").val();
+        let searchFurigana = $("#search-furigana").val();
+        let searchTel = $("#search-tel").val();
+        let searchStatus = $("input[name='status']:checked").val();
     
         if ((searchId && json[i].id.toString() === searchId) ||
             (searchName && json[i].name.includes(searchName)) ||
             (searchFurigana && json[i].furigana.includes(searchFurigana)) ||
-            (searchTel && json[i].tel.includes(searchTel))) {
+            (searchTel && json[i].tel.includes(searchTel)) ||
+            (json[i].status === statusValueToNumber(searchStatus)) 
+            ){
           arrayLineDOM.push(createTableDataDOM(json[i]));
         }
       }
@@ -57,7 +62,6 @@ fetch(url)
     
       $tableRows.after(arrayLineDOM);
     });
-    
   });
 
 $(".member-view").html($tableRows);
@@ -138,4 +142,14 @@ function birthdayToString(birthdayValue) {
   let formattedDate = year + "/" + month + "/" + day;
   return formattedDate;
 };
+
+function statusValueToNumber(inputValue) {
+  if (inputValue === "unspecified") {
+    return [0, 1];
+  } else if (inputValue === "general") {
+    return 0;
+  } else if (inputValue === "vip") {
+    return 1;
+  }
+}
 
