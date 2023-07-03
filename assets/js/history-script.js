@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycby1JBW60FdElZxOJ5qX5Sd1bbRPMEjKc_hV_PexgObSbIOVHrwz3GAICxmwGtvmnDxc/exec';
 
 tableRows = createHeaderDOM();
 
