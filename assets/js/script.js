@@ -170,6 +170,36 @@ function jsonToDictionary(json) {
   };
 }
 
+function limitAndFormatInput(input) {
+  var value = input.value.replace(/[^0-9]/g, ''); 
+  var formattedValue = formatPhoneNumber(value); 
+  if (value.length > 11 && !value.includes('-')) {
+    formattedValue = formattedValue.substr(0, 11); 
+    input.value = formattedValue; 
+    input.setAttribute('maxlength', '13');
+  } else {
+    input.setAttribute('maxlength', '13'); 
+    input.value = formattedValue;
+  }
+}
+
+function limitInputId(input) {
+  input.value = input.value.replace(/[^0-9]/g, ''); 
+}
+
+function formatPhoneNumber(value) {
+  var formattedValue = value;
+  
+  if (value.length >= 4 && value.length <= 7) {
+    formattedValue = value.slice(0, 3) + '-' + value.slice(3);
+  } else if (value.length > 7) {
+    formattedValue = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+  }
+  
+  return formattedValue;
+}
+
+
 function getGenderText(genderValue) {
   if (genderValue === 0) {
       return "無回答";

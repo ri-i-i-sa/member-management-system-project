@@ -22,7 +22,8 @@
             <div>
               <div class="form-item flex">
                 <p class="text-medium">ID</p>
-                <p><input type="text" class="search-id"></p>
+                <p><input type="text" class="search-id"  maxlength="4"  oninput="limitInputId(this)">
+                </p>
               </div>
               <div class="form-item flex">
                 <p class="text-medium">名前（漢字）</p>
@@ -37,7 +38,7 @@
           <div>
             <div class="form-item flex">
               <p class="text-medium">電話番号</p>
-              <p><input type="tel" class="search-tel"></p>
+              <p><input type="tel" class="search-tel" maxlength="11" oninput="limitAndFormatInput(this)"></p>
             </div>
             <div class="form-item flex">
               <p class="text-medium">会員ステータス</p>
