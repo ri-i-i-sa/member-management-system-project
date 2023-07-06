@@ -4,6 +4,10 @@ const params = {
   view: 'members'
 };
 
+const matchThrough = 0;
+const matchTrue = 1;
+const matchFalse = 2;
+
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
@@ -51,20 +55,25 @@ fetch(url)
         let searchFurigana = $(".search-furigana").val();
         let searchTel = $(".search-tel").val();
         let searchStatus = $("input[name='status']:checked").val();
+        
+        let searchConditions = []
+        
+        if (searchId) searchConditions.id = searchId; 
+        if (searchName) searchConditions.name = searchName; 
+        if (searchFurigana) searchConditions.furigana = searchFurigana; 
+        if (searchTel) searchConditions.tel = searchTel; 
+        if (searchStatus) searchConditions.status = searchStatus; 
 
-        if (searchId || searchName || searchFurigana || searchTel) {
-          isEmptySearch = false;
-        }
-      
-        if (searchStatus === "unspecified" && isEmptySearch) {
-          arrayLineDOM = json.map(createTableDataDOM);
-          } else if ((searchId && json[i].id.toString() === searchId) ||
-            (searchName && json[i].name.includes(searchName)) ||
-            (searchFurigana && json[i].furigana.includes(searchFurigana)) ||
-            (searchTel && json[i].tel.includes(searchTel)) ||
-            (json[i].status === statusValueToNumber(searchStatus)) 
-          ){
-          arrayLineDOM.push(createTableDataDOM(json[i]));
+        matchStatus = searchANDConditions (searchConditions, json[i]);
+
+        switch (matchStatus){
+          case matchThrough:
+            arrayLineDOM.push(createTableDataDOM(json[i]));
+            break;
+          case matchTrue:
+            arrayLineDOM.push(createTableDataDOM(json[i]));
+            break;
+          case matchFalse:
         }
       }
       $(".member-view").html($tableRows);
@@ -75,6 +84,46 @@ fetch(url)
 
 $(".member-view").html($tableRows);
 
+
+function searchANDConditions (searchConditions, json){
+  let matchStatus = matchThrough;
+
+  if ('id' in searchConditions) {
+    matchStatus = (json.id.toString() === searchConditions.id) ? matchTrue : matchFalse;
+  }
+  if ('name' in searchConditions) {
+    if (json.name.includes(searchConditions.name)) {
+      matchStatus = (matchStatus != matchFalse) ? matchTrue : matchFalse;
+    } else {
+      matchStatus = matchFalse;
+    }
+  }
+  if ('furigana' in searchConditions) {
+    if (json.furigana.toString().includes(searchConditions.furigana)) {
+      matchStatus = (matchStatus != matchFalse) ? matchTrue : matchFalse;
+    } else {
+      matchStatus = matchFalse;
+    }
+  }
+  if ('tel' in searchConditions) {
+    if (json.tel.toString() === searchConditions.tel) {
+      matchStatus = (matchStatus != matchFalse) ? matchTrue : matchFalse;
+    } else {
+      matchStatus = matchFalse;
+    }
+  }
+  if ('status' in searchConditions) {
+    if (searchConditions.status === "unspecified"){
+      matchStatus = (matchStatus != matchFalse) ? matchTrue : matchFalse;
+    } else if (json.status === statusValueToNumber(searchConditions.status)) {
+      matchStatus = (matchStatus != matchFalse) ? matchTrue : matchFalse;
+    } else {
+      matchStatus = matchFalse;
+    }
+  }
+
+  return matchStatus;
+}
 
 function createTableDataDOM(memberJson){
   let lineDOM = $('<tr class="line">')
@@ -153,12 +202,9 @@ function birthdayToString(birthdayValue) {
 };
 
 function statusValueToNumber(inputValue) {
-  if (inputValue === "unspecified") {
-    return "";
-  } else if (inputValue === "general") {
+  if (inputValue === "general") {
     return 0;
   } else if (inputValue === "vip") {
     return 1;
   }
 }
-
