@@ -200,6 +200,32 @@ function formatPhoneNumber(value) {
 }
 
 
+function limitInputLength(input) {
+  var maxLength = input.getAttribute("maxlength");
+  var value = input.value;
+  var byteLength = Array.from(value).reduce(function (length, char) {
+    return length + (char.charCodeAt(0) > 255 ? 2 : 1);
+  }, 0);
+
+  if (byteLength > maxLength) {
+    input.value = truncateValue(value, maxLength);
+  }
+}
+
+function truncateValue(value, maxLength) {
+  var truncatedValue = '';
+  var byteLength = 0;
+  for (var i = 0; i < value.length; i++) {
+    var charCode = value.charCodeAt(i);
+    byteLength += charCode > 255 ? 2 : 1;
+    if (byteLength > maxLength) {
+      break;
+    }
+    truncatedValue += value.charAt(i);
+  }
+  return truncatedValue;
+}
+
 function getGenderText(genderValue) {
   if (genderValue === 0) {
       return "無回答";
