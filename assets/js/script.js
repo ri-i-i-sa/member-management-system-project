@@ -13,6 +13,13 @@ url.search = new URLSearchParams(params).toString();
 
 $tableRows = createHeaderDOM();
 
+$('.reset-btn.text-medium').on('click', function(e) {
+  e.preventDefault();
+
+  $(".search-id, .search-name, .search-furigana, .search-tel").val('');
+  $("input[name='status'][value='unspecified']").prop('checked', true);
+});
+
 fetch(url)
   .then(function(fetch_data) {
     return fetch_data.json();
@@ -26,16 +33,6 @@ fetch(url)
     }
 
     $tableRows.after(arrayLineDOM);
-
-    $('.reset-btn.text-medium').on('click', function(e) {
-      e.preventDefault();
-      
-      $(".search-id").val('');
-      $(".search-name").val('');
-      $(".search-furigana").val('');
-      $(".search-tel").val('');
-      $("input[name='status'][value='unspecified']").prop('checked', true);
-    });
 
     $('.button-history a').on('click', function(e) {
       e.preventDefault();
@@ -55,7 +52,6 @@ fetch(url)
       e.preventDefault();
 
       let arrayLineDOM = [];
-      let isEmptySearch = true; 
     
       for (var i in json) {
 
@@ -93,7 +89,6 @@ fetch(url)
   });
 
 $(".member-view").html($tableRows);
-
 
 function searchANDConditions (searchConditions, json){
   let matchStatus = matchThrough;
@@ -208,7 +203,6 @@ function formatPhoneNumber(value) {
   
   return formattedValue;
 }
-
 
 function limitInputLength(input) {
   var maxLength = input.getAttribute("maxlength");
