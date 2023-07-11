@@ -27,6 +27,16 @@ fetch(url)
 
     $tableRows.after(arrayLineDOM);
 
+    $('.reset-btn.text-medium').on('click', function(e) {
+      e.preventDefault();
+      
+      $(".search-id").val('');
+      $(".search-name").val('');
+      $(".search-furigana").val('');
+      $(".search-tel").val('');
+      $("input[name='status'][value='unspecified']").prop('checked', true);
+    });
+
     $('.button-history a').on('click', function(e) {
       e.preventDefault();
 
