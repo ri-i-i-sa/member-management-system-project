@@ -22,23 +22,23 @@
             <div>
               <div class="form-item flex">
                 <p class="text-medium">ID</p>
-                <p><input type="text" class="search-id"  maxlength="4" placeholder="半角数字を入力" oninput="limitInputId(this)">
+                <p><input type="text" class="search-id" id="id-input" maxlength="4" placeholder="半角数字を入力" oninput="limitInputId(this)">
                 </p>
               </div>
               <div class="form-item flex">
                 <p class="text-medium">名前（漢字）</p>
-                <p><input type="text" class="search-name" maxlength="20" oninput="limitInputLength(this)"></p>
+                <p><input type="text" class="search-name" id="name-input" maxlength="20" oninput="limitInputLength(this)"></p>
               </div>
               <div class="form-item flex">
                 <p class="text-medium">名前（ふりがな）</p>
-                <p><input type="text" class="search-furigana" maxlength="20"></p>
+                <p><input type="text" class="search-furigana" id="furigana-input" maxlength="20"></p>
               </div>
             </div>
           </div>
           <div>
             <div class="form-item flex">
               <p class="text-medium">電話番号</p>
-              <p><input type="tel" class="search-tel" maxlength="11" placeholder="半角数字を入力" oninput="limitAndFormatInput(this)"></p>
+              <p><input type="tel" class="search-tel" id="tel-input" maxlength="11" placeholder="半角数字を入力" oninput="limitAndFormatInput(this)"></p>
             </div>
             <div class="form-item flex">
               <p class="text-medium">会員ステータス</p>
@@ -58,10 +58,10 @@
         </div>
         <div class="btn flex">
           <div class="reset button">
-            <input class="reset-btn text-medium" type="submit" value="条件をクリア" id="reset-button">
+            <input class="reset-btn text-medium" id="reset-button" type="submit" value="条件をクリア" >
           </div>
           <div class="search button">
-            <input class="search-btn text-medium" type="submit" value="検索" id="search-button">
+            <input class="search-btn text-medium" id="search-button" type="submit" value="検索" >
           </div>
         </div>
       </div>

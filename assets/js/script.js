@@ -13,10 +13,10 @@ url.search = new URLSearchParams(params).toString();
 
 $tableRows = createHeaderDOM();
 
-$('.reset-btn.text-medium').on('click', function(e) {
+$('#reset-button').on('click', function(e) {
   e.preventDefault();
 
-  $(".search-id, .search-name, .search-furigana, .search-tel").val('');
+  $("#id-input, #name-input, #furigana-input, #tel-input").val('');
   $("input[name='status'][value='unspecified']").prop('checked', true);
 });
 
@@ -34,7 +34,7 @@ fetch(url)
 
     $tableRows.after(arrayLineDOM);
 
-    $('.button-history a').on('click', function(e) {
+    $('#button-history a').on('click', function(e) {
       e.preventDefault();
 
       let id = $(this).attr('id');
@@ -48,7 +48,7 @@ fetch(url)
       window.location.href = targetURL.href;
     });
 
-    $('.search-btn.text-medium').on('click', function(e) {
+    $('#search-button').on('click', function(e) {
       e.preventDefault();
 
       let arrayLineDOM = [];
@@ -56,10 +56,10 @@ fetch(url)
       for (var i in json) {
 
         lineDOM = $('<tr class="line">');
-        let searchId = $(".search-id").val();
-        let searchName = $(".search-name").val();
-        let searchFurigana = $(".search-furigana").val();
-        let searchTel = $(".search-tel").val();
+        let searchId = $("#id-input").val();
+        let searchName = $("#name-input").val();
+        let searchFurigana = $("#furigana-input").val();
+        let searchTel = $("#tel-input").val();
         let searchStatus = $("input[name='status']:checked").val();
         
         let searchConditions = []
@@ -141,7 +141,7 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history"><a href="./history.html" class="text-medium" id="' +
+  lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history" id="button-history"><a href="./history.html" class="text-medium" id="' +
     memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   lineDOM.append($('</tr>'));
   return lineDOM;
