@@ -11,7 +11,7 @@ const matchFalse = 2;
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
-$tableRows = createHeaderDOM();
+tableRows = createHeaderDOM();
 
 $('#reset-button').on('click', function(e) {
   e.preventDefault();
@@ -32,7 +32,7 @@ fetch(url)
       arrayLineDOM.push(lineDOM);
     }
 
-    $tableRows.after(arrayLineDOM);
+    tableRows.after(arrayLineDOM);
 
     $('#button-history a').on('click', function(e) {
       e.preventDefault();
@@ -79,16 +79,15 @@ fetch(url)
           case matchTrue:
             arrayLineDOM.push(createTableDataDOM(json[i]));
             break;
-          case matchFalse:
         }
       }
-      $(".member-view").html($tableRows);
+      $(".member-view").html(tableRows);
     
-      $tableRows.after(arrayLineDOM);
+      tableRows.after(arrayLineDOM);
     });
   });
 
-$(".member-view").html($tableRows);
+$(".member-view").html(tableRows);
 
 function searchANDConditions (searchConditions, json){
   let matchStatus = matchThrough;
@@ -175,61 +174,6 @@ function jsonToDictionary(json) {
   };
 }
 
-function limitAndFormatInput(input) {
-  var value = input.value.replace(/[^0-9]/g, ''); 
-  var formattedValue = formatPhoneNumber(value); 
-  if (value.length > 11 && !value.includes('-')) {
-    formattedValue = formattedValue.substr(0, 11); 
-    input.value = formattedValue; 
-    input.setAttribute('maxlength', '13');
-  } else {
-    input.setAttribute('maxlength', '13'); 
-    input.value = formattedValue;
-  }
-}
-
-function limitInputId(input) {
-  input.value = input.value.replace(/[^0-9]/g, ''); 
-}
-
-function formatPhoneNumber(value) {
-  var formattedValue = value;
-  
-  if (value.length >= 4 && value.length <= 7) {
-    formattedValue = value.slice(0, 3) + '-' + value.slice(3);
-  } else if (value.length > 7) {
-    formattedValue = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
-  }
-  
-  return formattedValue;
-}
-
-function limitInputLength(input) {
-  var maxLength = input.getAttribute("maxlength");
-  var value = input.value;
-  var byteLength = Array.from(value).reduce(function (length, char) {
-    return length + (char.charCodeAt(0) > 255 ? 2 : 1);
-  }, 0);
-
-  if (byteLength > maxLength) {
-    input.value = truncateValue(value, maxLength);
-  }
-}
-
-function truncateValue(value, maxLength) {
-  var truncatedValue = '';
-  var byteLength = 0;
-  for (var i = 0; i < value.length; i++) {
-    var charCode = value.charCodeAt(i);
-    byteLength += charCode > 255 ? 2 : 1;
-    if (byteLength > maxLength) {
-      break;
-    }
-    truncatedValue += value.charAt(i);
-  }
-  return truncatedValue;
-}
-
 function getGenderText(genderValue) {
   if (genderValue === 0) {
       return "無回答";
@@ -268,3 +212,58 @@ function statusValueToNumber(inputValue) {
     return 1;
   }
 }
+
+function limitAndFormatInput(input) {
+  let value = input.value.replace(/[^0-9]/g, ''); 
+  let formattedValue = formatPhoneNumber(value); 
+  if (value.length > 11 && !value.includes('-')) {
+    formattedValue = formattedValue.substr(0, 11); 
+    input.value = formattedValue; 
+    input.setAttribute('maxlength', '13');
+  } else {
+    input.setAttribute('maxlength', '13'); 
+    input.value = formattedValue;
+  }
+}
+
+function limitInputId(input) {
+  input.value = input.value.replace(/[^0-9]/g, ''); 
+}
+
+function formatPhoneNumber(value) {
+  let formattedValue = value;
+  
+  if (value.length >= 4 && value.length <= 7) {
+    formattedValue = value.slice(0, 3) + '-' + value.slice(3);
+  } else if (value.length > 7) {
+    formattedValue = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+  }
+  
+  return formattedValue;
+}
+
+function limitInputLength(input) {
+  let maxLength = input.getAttribute("maxlength");
+  let value = input.value;
+  let byteLength = Array.from(value).reduce(function (length, char) {
+    return length + (char.charCodeAt(0) > 255 ? 2 : 1);
+  }, 0);
+
+  if (byteLength > maxLength) {
+    input.value = truncateValue(value, maxLength);
+  }
+}
+
+function truncateValue(value, maxLength) {
+  let truncatedValue = '';
+  let byteLength = 0;
+  for (let i = 0; i < value.length; i++) {
+    byteLength += value.charCodeAt(i) > 255 ? 2 : 1;
+    if (byteLength > maxLength) {
+      break;
+    }
+    truncatedValue += value.charAt(i);
+  }
+  return truncatedValue;
+}
+
