@@ -215,13 +215,14 @@ function statusValueToNumber(inputValue) {
 
 function limitAndFormatInput(input) {
   let value = input.value.replace(/[^0-9]/g, ''); 
+  let formattedValue = formatPhoneNumber(value); 
   if (value.length > 11 && !value.includes('-')) {
-    formatPhoneNumber(value) = formatPhoneNumber(value).substr(0, 11); 
-    input.value = formatPhoneNumber(value); 
+    formattedValue = formattedValue.substr(0, 11); 
+    input.value = formattedValue; 
     input.setAttribute('maxlength', '13');
   } else {
     input.setAttribute('maxlength', '13'); 
-    input.value = formatPhoneNumber(value);
+    input.value = formattedValue;
   }
 }
 
