@@ -11,10 +11,10 @@ $(document).ready(function() {
   };
 
   let memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
-  $("#id-wrap").html(memberIdDOM);
+  $("#display-id").html(memberIdDOM);
 
   let memberNameDOM = $('<p class="member-name">' + decodeURIComponent(urlParams.get('memberName')) + '</p><p>&nbsp;様</p>');
-  $("#name-wrap").html(memberNameDOM);
+  $("#display-name").html(memberNameDOM);
 
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
@@ -26,11 +26,11 @@ $(document).ready(function() {
   })
   .then(function(json) {
     if (json.length === 0) {
-    $("#no-history-message").show();
+    $("#hidden-message").show();
 
     } else {
       $("#heading").show();
-      $("#total-text").show();
+      $("#total-amount").show();
       let arrayLineDOM = [];
       let totalAmount = 0;
       
@@ -53,13 +53,13 @@ $(document).ready(function() {
       $("#total-text").append($totalAmountDOM);
     }
   });
-  $("#member-view").html(tableRows);
+  $("#member-table").html(tableRows);
 
-  $("#heading").hide();
+  $("#heading-row").hide();
 });
 
 function createHeaderDOM() {
-  let headerDOM = $('<tr class="heading flex" id="heading" hidden>');
+  let headerDOM = $('<tr class="heading flex" id="heading-row" hidden>');
   headerDOM.append($('<th>予約日時</th>'));
   headerDOM.append($('<th>来店日時</th>'));
   headerDOM.append($('<th>来店状態</th>'));
