@@ -217,12 +217,11 @@ function limitAndFormatInput(input) {
   let value = input.value.replace(/[^0-9]/g, ''); 
   let formattedValue = formatPhoneNumber(value); 
   if (value.length > 11 && !value.includes('-')) {
-    formattedValue = formattedValue.substr(0, 11); 
-    input.value = formattedValue; 
+    input.value = formattedValue.substr(0, 11); 
     input.setAttribute('maxlength', '13');
   } else {
     input.setAttribute('maxlength', '13'); 
-    input.value = formattedValue;
+    input.value = formattedValue.substr(0, 11);
   }
 }
 
