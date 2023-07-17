@@ -221,7 +221,7 @@ function limitAndFormatInput(input) {
     input.setAttribute('maxlength', '13');
   } else {
     input.setAttribute('maxlength', '13'); 
-    input.value = formattedValue.substr(0, 11);
+    input.value = formattedValue;
   }
 }
 
