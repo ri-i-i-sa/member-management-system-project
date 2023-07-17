@@ -29,7 +29,7 @@ $(document).ready(function() {
     $("#hidden-message").show();
 
     } else {
-      $("#heading").show();
+      $("#heading-row").show();
       $("#total-amount").show();
       let arrayLineDOM = [];
       let totalAmount = 0;
