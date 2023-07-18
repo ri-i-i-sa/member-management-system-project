@@ -34,7 +34,7 @@ fetch(url)
 
     tableRows.after(arrayLineDOM);
 
-    $('#btn-history a').on('click', function(e) {
+    $('#history-btn a').on('click', function(e) {
       e.preventDefault();
 
       params.memberId = $(this).attr('id');
@@ -138,7 +138,7 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="btn-date"><a href="#" class="text-medium">来店登録</a></div><div class="btn-history" id="btn-history"><a href="./history.html" class="text-medium" id="' +
+  lineDOM.append($('<td><div class="flex"><div class="btn-date"><a href="#" class="text-medium">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
     memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   lineDOM.append($('</tr>'));
   return lineDOM;
