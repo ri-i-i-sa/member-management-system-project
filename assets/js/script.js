@@ -218,11 +218,10 @@ function limitAndFormatInput(input) {
   let formattedValue = formatPhoneNumber(value); 
   if (value.length > 11 && !value.includes('-')) {
     input.value = formattedValue.substr(0, 11); 
-    input.setAttribute('maxlength', '13');
   } else {
-    input.setAttribute('maxlength', '13'); 
     input.value = formattedValue;
   }
+  input.setAttribute('maxlength', '13');
 }
 
 function limitInputId(input) {
