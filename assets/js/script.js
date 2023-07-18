@@ -70,7 +70,7 @@ fetch(url)
         if (searchTel) searchConditions.tel = searchTel; 
         if (searchStatus) searchConditions.status = searchStatus; 
 
-        matchStatus = searchANDConditions (searchConditions, json[i]);
+        matchStatus = searchANDConditions(searchConditions, json[i]);
 
         switch (matchStatus){
           case matchThrough:
@@ -89,7 +89,7 @@ fetch(url)
 
 $(".member-view").html(tableRows);
 
-function searchANDConditions (searchConditions, json){
+function searchANDConditions(searchConditions, json){
   let matchStatus = matchThrough;
 
   if ('id' in searchConditions) {
