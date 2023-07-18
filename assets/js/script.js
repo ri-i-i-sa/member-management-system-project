@@ -13,7 +13,7 @@ url.search = new URLSearchParams(params).toString();
 
 tableRows = createTableHeaderDOM();
 
-$('#reset-button').on('click', function(e) {
+$('#reset-btn').on('click', function(e) {
   e.preventDefault();
 
   $("#id-input, #name-input, #furigana-input, #tel-input").val('');
@@ -34,7 +34,7 @@ fetch(url)
 
     tableRows.after(arrayLineDOM);
 
-    $('#button-history a').on('click', function(e) {
+    $('#btn-history a').on('click', function(e) {
       e.preventDefault();
 
       let id = $(this).attr('id');
@@ -48,7 +48,7 @@ fetch(url)
       window.location.href = targetURL.href;
     });
 
-    $('#search-button').on('click', function(e) {
+    $('#search-btn').on('click', function(e) {
       e.preventDefault();
 
       let arrayLineDOM = [];
@@ -140,7 +140,7 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="button-date"><a href="#" class="text-medium">来店登録</a></div><div class="button-history" id="button-history"><a href="./history.html" class="text-medium" id="' +
+  lineDOM.append($('<td><div class="flex"><div class="btn-date"><a href="#" class="text-medium">来店登録</a></div><div class="btn-history" id="btn-history"><a href="./history.html" class="text-medium" id="' +
     memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   lineDOM.append($('</tr>'));
   return lineDOM;
