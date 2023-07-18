@@ -37,10 +37,8 @@ fetch(url)
     $('#btn-history a').on('click', function(e) {
       e.preventDefault();
 
-      let id = $(this).attr('id');
-      let name = $(this).data('name');
-      params.memberId = id;
-      params.memberName = encodeURIComponent(name);
+      params.memberId = $(this).attr('id');
+      params.memberName = encodeURIComponent($(this).data('name'));
 
       let targetURL = new URL("./history.html", window.location.href);
       targetURL.search = new URLSearchParams(params).toString();
