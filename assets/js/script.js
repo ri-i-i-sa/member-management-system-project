@@ -11,7 +11,7 @@ const matchFalse = 2;
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
-tableRows = createHeaderDOM();
+tableRows = createTableHeaderDOM();
 
 $('#reset-button').on('click', function(e) {
   e.preventDefault();
@@ -146,7 +146,7 @@ function createTableDataDOM(memberJson){
   return lineDOM;
 }
 
-function createHeaderDOM() {
+function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
   headerDOM.append($('<th>ID</th>'));
   headerDOM.append($('<th>名前（漢字）</th>'));
