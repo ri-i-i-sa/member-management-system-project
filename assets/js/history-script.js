@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycbxq5EBR77k4LWLhayZYu0iZa22SlZ_BChE2_jMvMMDZyccu8-54Z7i4ucqwg9ZKk0IR/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycby1JBW60FdElZxOJ5qX5Sd1bbRPMEjKc_hV_PexgObSbIOVHrwz3GAICxmwGtvmnDxc/exec';
 
 tableRows = createHeaderDOM();
 
@@ -11,10 +11,10 @@ $(document).ready(function() {
   };
 
   let memberIdDOM = $('<p class="id-name">ID : <p class="id-number">' + params.memberId + '</p>');
-  $(".id-wrap.flex").html(memberIdDOM);
+  $("#display-id").html(memberIdDOM);
 
   let memberNameDOM = $('<p class="member-name">' + decodeURIComponent(urlParams.get('memberName')) + '</p><p>&nbsp;様</p>');
-  $(".name-wrap.flex").html(memberNameDOM);
+  $("#display-name").html(memberNameDOM);
 
   const url = new URL(api_url);
   url.search = new URLSearchParams(params).toString();
@@ -26,11 +26,11 @@ $(document).ready(function() {
   })
   .then(function(json) {
     if (json.length === 0) {
-    $(".no-history-message").show();
+    $("#hidden-message").show();
 
     } else {
-      $(".heading.flex").show();
-      $(".total-text").show();
+      $("#heading-row").show();
+      $("#total-amount").show();
       let arrayLineDOM = [];
       let totalAmount = 0;
       
@@ -50,16 +50,16 @@ $(document).ready(function() {
       tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="total-price">' + formatAmount(totalAmount) + '</span>');
-      $(".total-text").append($totalAmountDOM);
+      $("#total-text").append($totalAmountDOM);
     }
   });
-  $(".member-view").html(tableRows);
+  $("#member-table").html(tableRows);
 
-  $(".heading.flex").hide();
+  $("#heading-row").hide();
 });
 
 function createHeaderDOM() {
-  let headerDOM = $('<tr class="heading flex" hidden>');
+  let headerDOM = $('<tr class="heading flex" id="heading-row" hidden>');
   headerDOM.append($('<th>予約日時</th>'));
   headerDOM.append($('<th>来店日時</th>'));
   headerDOM.append($('<th>来店状態</th>'));

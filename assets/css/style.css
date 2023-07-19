@@ -67,12 +67,17 @@ p {
   margin-top: 10px;
 }
 
-.search.button {
-  margin-left: 80%;
+.btn.flex {
+  justify-content: flex-end;
+}
+
+.search.btn {
+  margin-left: 5%;
+  margin-right: 5%;
   margin-bottom: 24px;
 }
 
-input.search-btn {
+input.search-btn,input.reset-btn {
   background-color: #4AEF82;
   color: #FFFFFF;
   border: none;
@@ -82,10 +87,14 @@ input.search-btn {
   margin-top: 10px;
 }
 
-input.search-btn:hover {
+input.search-btn:hover,input.reset-btn:hover {
   background: #4AEF82;
   transform: translateY(-2px);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+input.reset-btn,input.reset-btn:hover {
+  background-color:#818080
 }
 
 .member-wrap h1 {
@@ -166,7 +175,7 @@ tr:first-child,td:first-child {
   padding-left: 4rem !important;
 }
 
-.button-date,.button-history {
+.btn-date,.btn-history {
   background: #FFFFFF;
   border: 1px solid #7B7979;
   border-radius: 20px;
@@ -175,23 +184,23 @@ tr:first-child,td:first-child {
   padding-top: 4px;
 }
 
-.button-date a,.button-history a {
+.btn-date a,.btn-history a {
   padding-left: 10px;
   padding-top: 16px;
   text-decoration: none;
   color: #292929;
 }
 
-.button-date:hover,.button-history:hover {
+.btn-date:hover,.btn-history:hover {
   background: #818080;
   border-radius: 20px;
 }
 
-.button-date a:hover,.button-history a:hover{
+.btn-date a:hover,.btn-history a:hover{
   color: #FFFFFF;
 }
 
-.button-history {
+.btn-history {
   margin-left: 8px;
 }
 

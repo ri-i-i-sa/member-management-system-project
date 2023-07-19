@@ -13,32 +13,32 @@
   <title>会員管理システム|来店履歴</title>
 </head>
 <body>
-  <main class="bkg">
+  <main>
     <p class="back-btn">
       <a href="./index.html">
         <img src="./assets/img/iconmonstr-angel-left-thin-24.png" alt="">
         戻る
       </a>
     </p>    
-    <div class="member-wrap">
+    <div>
       <h1>来店履歴</h1>
       <div class="member-inf flex">
-        <div class="id-wrap flex">
+        <div class="id-wrap flex" id="display-id">
           <p class="id-name">ID : </p>
           <p class="id-number">1</p>
         </div>
-        <div class="name-wrap flex">
-          <p class="member-name">dammy</p>
+        <div class="name-wrap flex" id="display-name">
+          <p>dammy</p>
           <p>&nbsp;様</p>
         </div>
       </div>
       <div class="flex">
-        <span class="total-text" hidden>合計金額 <span class="total-price"></span>
+        <span class="total-text" id="total-amount" hidden>合計金額 <span class="total-price"></span>
         </span>
       </div>
-      <p class="no-history-message" hidden>履歴はありません</p>
-      <table class="member-view flex">
-        <tr class="heading flex">
+      <p class="no-history-message" id="hidden-message" hidden>履歴はありません</p>
+      <table class="member-view flex" id="member-table">
+        <tr class="heading flex" id="heading-row">
           <th>予約日時</th>
           <th>来店日時</th>
           <th>来店状態</th>

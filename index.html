@@ -13,7 +13,7 @@
   <title>会員管理システム</title>
 </head>
 <body>
-  <main class="bkg">
+  <main>
     <div class="search-wrap">
       <h1>検索</h1>
       <div class="search-bkg">
@@ -22,22 +22,23 @@
             <div>
               <div class="form-item flex">
                 <p class="text-medium">ID</p>
-                <p><input type="text"></p>
+                <p><input type="text" id="id-input" maxlength="4" placeholder="半角数字を入力" oninput="limitInputId(this)">
+                </p>
               </div>
               <div class="form-item flex">
                 <p class="text-medium">名前（漢字）</p>
-                <p><input type="text"></p>
+                <p><input type="text" id="name-input" maxlength="20" oninput="limitInputLength(this)"></p>
               </div>
               <div class="form-item flex">
                 <p class="text-medium">名前（ふりがな）</p>
-                <p><input type="text"></p>
+                <p><input type="text" class="search-furigana" id="furigana-input" maxlength="20"></p>
               </div>
             </div>
           </div>
           <div>
             <div class="form-item flex">
               <p class="text-medium">電話番号</p>
-              <p><input type="tel"></p>
+              <p><input type="tel" class="search-tel" id="tel-input" maxlength="11" placeholder="半角数字を入力" oninput="limitAndFormatInput(this)"></p>
             </div>
             <div class="form-item flex">
               <p class="text-medium">会員ステータス</p>
@@ -55,8 +56,13 @@
             </p>
           </div>
         </div>
-        <div class="search button">
-          <input class="search-btn text-medium" type="submit" value="検索">
+        <div class="btn flex">
+          <div>
+            <input class="reset-btn text-medium" id="reset-btn" type="submit" value="条件をクリア" >
+          </div>
+          <div class="search btn">
+            <input class="search-btn text-medium" id="search-btn" type="submit" value="検索" >
+          </div>
         </div>
       </div>
     </div>
@@ -85,10 +91,10 @@
           <td>【4】</td>
           <td>
             <div class="flex">
-              <div class="button-date">
+              <div>
                 <a href="#" class="text-medium">来店登録</a>
               </div>
-              <div class="button-history">
+              <div class="history-btn">
                 <a href="./history.html" class="text-medium">来店履歴</a>
               </div>
             </div>
@@ -105,10 +111,10 @@
           <td>【2】</td>
           <td>
             <div class="flex">
-              <div class="button-date">
+              <div>
                 <a href="#" class="text-medium">来店登録</a>
               </div>
-              <div class="button-history">
+              <div class="history-btn">
                 <a href="./history.html" class="text-medium">来店履歴</a>
               </div>
             </div>
@@ -125,10 +131,10 @@
           <td>【1】</td>
           <td>
             <div class="flex">
-              <div class="button-date">
+              <div>
                 <a href="#" class="text-medium">来店登録</a>
               </div>
-              <div class="button-history">
+              <div class="history-btn">
                 <a href="./history.html" class="text-medium">来店履歴</a>
               </div>
             </div>
