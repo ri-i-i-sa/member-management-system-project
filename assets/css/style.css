@@ -175,7 +175,7 @@ tr:first-child,td:first-child {
   padding-left: 4rem !important;
 }
 
-.btn-date,.btn-history {
+.btn-date,.history-btn {
   background: #FFFFFF;
   border: 1px solid #7B7979;
   border-radius: 20px;
@@ -184,14 +184,14 @@ tr:first-child,td:first-child {
   padding-top: 4px;
 }
 
-.btn-date a,.btn-history a {
+.btn-date a,.history-btn a {
   padding-left: 10px;
   padding-top: 16px;
   text-decoration: none;
   color: #292929;
 }
 
-.btn-date:hover,.btn-history:hover {
+.btn-date:hover,.history-btn:hover {
   background: #818080;
   border-radius: 20px;
 }
