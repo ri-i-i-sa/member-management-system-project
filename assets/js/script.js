@@ -36,6 +36,10 @@ fetch(url)
 
     tableRows.after(arrayLineDOM);
 
+    $('#arrival-btn a').on('click', function(e) {
+      MicroModal.show('modal-1');
+    });
+
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
 
@@ -140,7 +144,7 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="btn-date"><a data-micromodal-trigger="modal-2" class="text-medium">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+  lineDOM.append($('<td><div class="flex"><div class="btn-date" id="arrival-btn"><a class="text-medium">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
     memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   lineDOM.append($('</tr>'));
   return lineDOM;
