@@ -36,9 +36,15 @@ fetch(url)
 
     tableRows.after(arrayLineDOM);
 
-    $('#arrival-btn a').on('click', function(e) {
-      MicroModal.show('modal-1');
+    $(document).ready(function() {
+      $('#arrival-btn a').on('click', function(e) {
+        e.preventDefault();
+        $('#modal-1-title').text(new Date().toLocaleString('ja-JP'));
+    
+        MicroModal.show('modal-1');
+      });
     });
+    
 
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
