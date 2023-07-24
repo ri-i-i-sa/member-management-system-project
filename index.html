@@ -92,7 +92,28 @@
           <td>
             <div class="flex">
               <div>
-                <a href="#" class="text-medium">来店登録</a>
+                <a data-micromodal-trigger="modal-2" href="#" class="text-medium">来店登録</a>
+              </div>
+              <div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                  <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <header class="modal__header">
+                      <h2 class="modal__title" id="modal-1-title">
+                        モーダル３のテストです。
+                      </h2>
+                      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                    </header>
+                    <div class="modal__content" id="modal-1-content">
+                      <p>
+                        Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.
+                      </p>
+                    </div>
+                    <footer class="modal__footer">
+                      <button class="modal__btn modal__btn-primary">Continue</button>
+                      <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                    </footer>
+                  </div>
+                </div>
               </div>
               <div class="history-btn">
                 <a href="./history.html" class="text-medium">来店履歴</a>
@@ -142,9 +163,59 @@
         </tr>
       </table>
     </div>
+        
+    <div>
+      <a data-micromodal-trigger="modal-1" class="text-medium">来店登録</a>
+    </div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <h2 class="modal__title" id="modal-1-title">
+              モーダル１のテストです。
+            </h2>
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+          </header>
+          <div class="modal__content" id="modal-1-content">
+            <p>
+              Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.
+            </p>
+          </div>
+          <footer class="modal__footer">
+            <button class="modal__btn modal__btn-primary">Continue</button>
+            <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <h2 class="modal__title" id="modal-1-title">
+              モーダル２のテストです。
+            </h2>
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+          </header>
+          <div class="modal__content" id="modal-1-content">
+            <p>
+              Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.
+            </p>
+          </div>
+          <footer class="modal__footer">
+            <button class="modal__btn modal__btn-primary">Continue</button>
+            <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          </footer>
+        </div>
+      </div>
+    </div>     
+    
   </main>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="./node_modules/micromodal/dist/micromodal.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
+
