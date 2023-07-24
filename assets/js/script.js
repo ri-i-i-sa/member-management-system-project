@@ -39,12 +39,17 @@ fetch(url)
     $(document).ready(function() {
       $('#arrival-btn a').on('click', function(e) {
         e.preventDefault();
-        $('#modal-1-title').text(new Date().toLocaleString('ja-JP'));
+    
+        function updateClock() {
+          let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+          document.getElementById('modal-1-title').textContent = new Date().toLocaleString('ja-JP', options);
+        }
+    
+        setInterval(updateClock, 1000);
     
         MicroModal.show('modal-1');
       });
-    });
-    
+    });    
 
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
