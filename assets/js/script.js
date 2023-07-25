@@ -36,20 +36,15 @@ fetch(url)
 
     tableRows.after(arrayLineDOM);
 
-    function updateClock() {
-      let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-      $('#modal-1-title').text(new Date().toLocaleString('ja-JP', options));
-    }
-
-    setInterval(updateClock, 1000);
-
     $(document).ready(function() {
       $('#arrival-btn a').on('click', function(e) {
         e.preventDefault();
         MicroModal.show('modal-1');
+ 
+        $('#member-name').text($(this).data('name'));
       });
     });
-
+    
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
 
@@ -95,6 +90,7 @@ fetch(url)
             break;
         }
       }
+
       $(".member-view").html(tableRows);
     
       tableRows.after(arrayLineDOM);
@@ -154,7 +150,7 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+  lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
     memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   lineDOM.append($('</tr>'));
   return lineDOM;
@@ -187,6 +183,13 @@ function jsonToDictionary(json) {
     memberStatus: getStatusText(json.status)
   };
 }
+
+function updateClock() {
+  let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+  $('#modal-1-title').text(new Date().toLocaleString('ja-JP', options));
+}
+
+setInterval(updateClock, 1000);
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
