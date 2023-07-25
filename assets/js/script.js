@@ -1,6 +1,6 @@
 MicroModal.init();
 
-const api_url = 'https://script.google.com/macros/s/AKfycby1JBW60FdElZxOJ5qX5Sd1bbRPMEjKc_hV_PexgObSbIOVHrwz3GAICxmwGtvmnDxc/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbxUXyQnrTf6alW6wASQflgkPaNIrJUG8jsjz_lHV8CvD39tnCNZ7uoeT_oG26QkWKSl/exec';
 
 const params = {
   view: 'members'
@@ -29,8 +29,8 @@ fetch(url)
   .then(function(json) {
     let arrayLineDOM = [];
 
-    for (var i in json) {
-      lineDOM = createTableDataDOM(json[i]);
+    for (var i in json.members) {
+      lineDOM = createTableDataDOM(json.members[i]);
       arrayLineDOM.push(lineDOM);
     }
 
