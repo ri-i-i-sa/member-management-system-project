@@ -6,10 +6,12 @@ const params = {
   view: 'members'
 };
 
-
 const matchThrough = 0;
 const matchTrue = 1;
 const matchFalse = 2;
+
+const clockOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+const systemDate = new Date().toLocaleString('ja-JP', clockOptions);
 
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
@@ -29,6 +31,22 @@ fetch(url)
   })
   .then(function(json) {
     let arrayLineDOM = [];
+
+    for (var i in json.historys) {
+      const arrivalAtValue = new Date(json.historys[i].reserveAt).toLocaleString('ja-JP', clockOptions);
+
+      let arrivalAtValueResetTime = new Date(arrivalAtValue)
+      arrivalAtValueResetTime.setHours(0, 0, 0, 0);
+
+      let systemDateResetTime = new Date(systemDate);
+      systemDateResetTime.setHours(0, 0, 0, 0);
+
+      if (arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) {
+        console.log("ある");
+      } else {
+        console.log("ない");
+      }
+    };
 
     for (var i in json.members) {
       lineDOM = createTableDataDOM(json.members[i]);
@@ -185,12 +203,11 @@ function jsonToDictionary(json) {
   };
 }
 
+setInterval(updateClock, 1000);
 function updateClock() {
-  let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-  $('#modal-1-title').text(new Date().toLocaleString('ja-JP', options));
+  $('#modal-1-title').text(systemDate);
 }
 
-setInterval(updateClock, 1000);
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {
