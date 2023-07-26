@@ -50,7 +50,7 @@ $(document).ready(function() {
       tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="total-price">' + formatAmount(totalAmount) + '</span>');
-      $("#total-text").append($totalAmountDOM);
+      $("#total-amount").append($totalAmountDOM);
     }
   });
   $("#member-table").html(tableRows);
