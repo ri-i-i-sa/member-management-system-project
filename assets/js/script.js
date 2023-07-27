@@ -13,6 +13,8 @@ const matchFalse = 2;
 const clockOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 const systemDate = new Date().toLocaleString('ja-JP', clockOptions);
 
+let haveTodayReserveId = null;
+
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
@@ -32,26 +34,28 @@ fetch(url)
   .then(function(json) {
     let arrayLineDOM = [];
 
-    for (var i in json.histories) {
-      const arrivalAtValue = new Date(json.histories[i].reserveAt).toLocaleString('ja-JP', clockOptions);
+      for (var j in json.histories) {
+  
+        const arrivalAtValue = new Date(json.histories[j].reserveAt).toLocaleString('ja-JP', clockOptions);
+    
+        let arrivalAtValueResetTime = new Date(arrivalAtValue)
+        arrivalAtValueResetTime.setHours(0, 0, 0, 0);
+  
+        let systemDateResetTime = new Date(systemDate);
+        systemDateResetTime.setHours(0, 0, 0, 0);
+    
+        if ((arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) && json.histories[j].arrivalFlag === 0) {
+          haveTodayReserveId = (json.histories[j].membersId);
 
-      let arrivalAtValueResetTime = new Date(arrivalAtValue)
-      arrivalAtValueResetTime.setHours(0, 0, 0, 0);
 
-      let systemDateResetTime = new Date(systemDate);
-      systemDateResetTime.setHours(0, 0, 0, 0);
-
-      if (arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) {
-        console.log("ある");
-      } else {
-        console.log("ない");
+        } else {
+        }
       }
-    };
 
     for (var i in json.members) {
       lineDOM = createTableDataDOM(json.members[i]);
       arrayLineDOM.push(lineDOM);
-    }
+    };
 
     tableRows.after(arrayLineDOM);
 
@@ -169,11 +173,19 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
-    memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+
+  if (memberInfo.memberId === haveTodayReserveId) {
+    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+  } else {
+    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"></a></div<div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></td>'));
+  }
+
   lineDOM.append($('</tr>'));
   return lineDOM;
 }
+
 
 function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
