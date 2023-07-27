@@ -85,7 +85,7 @@ fetch(url)
 
       let arrayLineDOM = [];
     
-      for (var i in json) {
+      for (var i in json.members) {
 
         lineDOM = $('<tr class="line">');
         let searchId = $("#id-input").val();
@@ -102,14 +102,14 @@ fetch(url)
         if (searchTel) searchConditions.tel = searchTel; 
         if (searchStatus) searchConditions.status = searchStatus; 
 
-        let matchStatus = searchANDConditions(searchConditions, json[i]);
+        let matchStatus = searchANDConditions(searchConditions, json.members[i]);
 
         switch (matchStatus){
           case matchThrough:
-            arrayLineDOM.push(createTableDataDOM(json[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i]));
             break;
           case matchTrue:
-            arrayLineDOM.push(createTableDataDOM(json[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i]));
             break;
         }
       }
