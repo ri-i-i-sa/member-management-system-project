@@ -178,14 +178,13 @@ function createTableDataDOM(memberJson){
     lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
       memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   } else {
-    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"></a></div<div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
-      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></td>'));
+    lineDOM.append($('<td><div class="flex"><div class="empty-element"></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   }
 
   lineDOM.append($('</tr>'));
   return lineDOM;
 }
-
 
 function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
@@ -215,11 +214,11 @@ function jsonToDictionary(json) {
   };
 }
 
+//どこに置くと可読性高い？ループの中だと読み込み遅くなる。
 setInterval(updateClock, 1000);
 function updateClock() {
   $('#modal-1-title').text(systemDate);
 }
-
 
 function getGenderText(genderValue) {
   if (genderValue === 0) {

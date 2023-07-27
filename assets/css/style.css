@@ -175,6 +175,10 @@ tr:first-child,td:first-child {
   padding-left: 4rem !important;
 }
 
+.empty-element {
+  width: 80px;
+}
+
 .arrivalinput-btn,.history-btn {
   background: #FFFFFF;
   border: 1px solid #7B7979;
