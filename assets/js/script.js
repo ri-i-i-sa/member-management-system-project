@@ -13,7 +13,7 @@ const matchFalse = 2;
 const clockOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 const systemDate = new Date().toLocaleString('ja-JP', clockOptions);
 
-let haveTodayReserveId = null;
+let haveTodayReserveIds = [];
 
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
@@ -34,8 +34,8 @@ fetch(url)
   .then(function(json) {
     let arrayLineDOM = [];
 
+    for (var i in json.members) {
       for (var j in json.histories) {
-  
         const arrivalAtValue = new Date(json.histories[j].reserveAt).toLocaleString('ja-JP', clockOptions);
     
         let arrivalAtValueResetTime = new Date(arrivalAtValue)
@@ -45,17 +45,12 @@ fetch(url)
         systemDateResetTime.setHours(0, 0, 0, 0);
     
         if ((arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) && json.histories[j].arrivalFlag === 0) {
-          haveTodayReserveId = (json.histories[j].membersId);
-
-
-        } else {
+          haveTodayReserveIds.push(json.histories[j].membersId);
         }
       }
-
-    for (var i in json.members) {
       lineDOM = createTableDataDOM(json.members[i]);
       arrayLineDOM.push(lineDOM);
-    };
+  };
 
     tableRows.after(arrayLineDOM);
 
@@ -162,9 +157,13 @@ function searchANDConditions(searchConditions, json){
   return matchStatus;
 }
 
-function createTableDataDOM(memberJson){
-  let lineDOM = $('<tr class="line">')
+function isMemberIdInTodayReserveIds(memberId, todayReserveIds) {
+  return todayReserveIds.includes(memberId);
+}
+
+function createTableDataDOM(memberJson) {
   let memberInfo = jsonToDictionary(memberJson);
+  let lineDOM = $('<tr class="line">');
   lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
   lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
@@ -174,8 +173,8 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
 
-  if (memberInfo.memberId === haveTodayReserveId) {
-    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium"" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+  if (isMemberIdInTodayReserveIds(memberInfo.memberId, haveTodayReserveIds)) {
+    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
       memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   } else {
     lineDOM.append($('<td><div class="flex"><div class="empty-element"></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
