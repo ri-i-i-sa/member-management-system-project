@@ -33,6 +33,7 @@ fetch(url)
     let arrayLineDOM = [];
     let haveTodayReserveIds = {};
     let haveTodayReserveIdsKey = []; 
+    let haveTodayReserveIdsValue = []; 
 
     for (var i in json.members) {    
       for (var j in json.histories) {
@@ -49,6 +50,7 @@ fetch(url)
           haveTodayReserveIds[json.histories[j].membersId] = json.histories[j].id;
 
           haveTodayReserveIdsKey = Object.keys(haveTodayReserveIds).toString();
+          haveTodayReserveIdsValue = Object.values(haveTodayReserveIds).toString();
         }
       }
     
@@ -63,8 +65,24 @@ fetch(url)
         e.preventDefault();
         MicroModal.show('modal-1');
         $('#member-name').text($(this).data('name'));
+        $('#hid-input-id').val($(this).data('id'));
+        $(document).ready(function() {
+          $('#ok-btn').on('click', function(e) {
+            e.preventDefault();
+    
+            if (haveTodayReserveIdsKey.includes($('#hid-input-id').val())){
+              let matchingValue = haveTodayReserveIds[$('#hid-input-id').val()];
+
+              params.reserveHistoryId = matchingValue;
+          
+              const url = new URL(api_url);
+              url.search = new URLSearchParams(params).toString();
+            }
+          });
+        });
       });
     });
+
     
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
@@ -177,7 +195,7 @@ function createTableDataDOM(memberJson,haveTodayReserveIdsKey) {
   lineDOM.append($('<td>4</td>'));
 
   if (isMemberIdInTodayReserveIds(memberInfo.memberId, haveTodayReserveIdsKey)) {
-    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium" data-name="' + memberInfo.memberName + '" data-id="' + memberInfo.memberId + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
       memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   } else {
     lineDOM.append($('<td><div class="flex"><div class="empty-element"></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
@@ -187,6 +205,7 @@ function createTableDataDOM(memberJson,haveTodayReserveIdsKey) {
   lineDOM.append($('</tr>'));
   return lineDOM;
 }
+
 
 function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
