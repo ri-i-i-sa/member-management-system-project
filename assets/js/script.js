@@ -13,8 +13,6 @@ const matchFalse = 2;
 const clockOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 const systemDate = new Date().toLocaleString('ja-JP', clockOptions);
 
-let haveTodayReserveIds = [];
-
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
 
@@ -33,32 +31,37 @@ fetch(url)
   })
   .then(function(json) {
     let arrayLineDOM = [];
+    let haveTodayReserveIds = {};
+    let haveTodayReserveIdsKey = []; 
 
-    for (var i in json.members) {
+    for (var i in json.members) {    
       for (var j in json.histories) {
-        const arrivalAtValue = new Date(json.histories[j].reserveAt).toLocaleString('ja-JP', clockOptions);
+        if (json.histories[j].membersId !== json.members[i].id) continue;
     
-        let arrivalAtValueResetTime = new Date(arrivalAtValue)
+        const arrivalAtValue = new Date(json.histories[j].reserveAt).toLocaleString('ja-JP', clockOptions);
+        let arrivalAtValueResetTime = new Date(arrivalAtValue);
         arrivalAtValueResetTime.setHours(0, 0, 0, 0);
-  
+    
         let systemDateResetTime = new Date(systemDate);
         systemDateResetTime.setHours(0, 0, 0, 0);
     
         if ((arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) && json.histories[j].arrivalFlag === 0) {
-          haveTodayReserveIds.push(json.histories[j].membersId);
+          haveTodayReserveIds[json.histories[j].membersId] = json.histories[j].id;
+
+          haveTodayReserveIdsKey = Object.keys(haveTodayReserveIds).toString();
         }
       }
-      lineDOM = createTableDataDOM(json.members[i]);
+    
+      lineDOM = createTableDataDOM(json.members[i], haveTodayReserveIdsKey);
       arrayLineDOM.push(lineDOM);
-  };
-
+    }
+    
     tableRows.after(arrayLineDOM);
 
     $(document).ready(function() {
       $('#arrival-btn a').on('click', function(e) {
         e.preventDefault();
         MicroModal.show('modal-1');
- 
         $('#member-name').text($(this).data('name'));
       });
     });
@@ -161,8 +164,8 @@ function isMemberIdInTodayReserveIds(memberId, todayReserveIds) {
   return todayReserveIds.includes(memberId);
 }
 
-function createTableDataDOM(memberJson) {
-  let memberInfo = jsonToDictionary(memberJson);
+function createTableDataDOM(memberJson,haveTodayReserveIdsKey) {
+  let memberInfo = jsonToDictionary(memberJson,haveTodayReserveIdsKey);
   let lineDOM = $('<tr class="line">');
   lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
@@ -173,7 +176,7 @@ function createTableDataDOM(memberJson) {
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
 
-  if (isMemberIdInTodayReserveIds(memberInfo.memberId, haveTodayReserveIds)) {
+  if (isMemberIdInTodayReserveIds(memberInfo.memberId, haveTodayReserveIdsKey)) {
     lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium" data-name="' + memberInfo.memberName + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
       memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
   } else {
