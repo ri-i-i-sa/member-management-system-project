@@ -51,6 +51,7 @@ fetch(url)
 
           haveTodayReserveIdsKey = Object.keys(haveTodayReserveIds).toString();
           haveTodayReserveIdsValue = Object.values(haveTodayReserveIds).toString();
+
         }
       }
     
@@ -64,26 +65,31 @@ fetch(url)
       $('#arrival-btn a').on('click', function(e) {
         e.preventDefault();
         MicroModal.show('modal-1');
+
         $('#member-name').text($(this).data('name'));
         $('#hid-input-id').val($(this).data('id'));
+
         $(document).ready(function() {
           $('#ok-btn').on('click', function(e) {
             e.preventDefault();
     
             if (haveTodayReserveIdsKey.includes($('#hid-input-id').val())){
               let matchingValue = haveTodayReserveIds[$('#hid-input-id').val()];
-
               params.reserveHistoryId = matchingValue;
           
-              const url = new URL(api_url);
+              url = new URL(api_url);
               url.search = new URLSearchParams(params).toString();
+
+              fetch(url)
+              .then(function(fetch_data) {
+                return fetch_data.json();
+              })
             }
-          });
-        });
-      });
+          })
+        })
+      })
     });
 
-    
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
 
@@ -129,9 +135,7 @@ fetch(url)
             break;
         }
       }
-
       $(".member-view").html(tableRows);
-    
       tableRows.after(arrayLineDOM);
     });
   });
@@ -205,7 +209,6 @@ function createTableDataDOM(memberJson,haveTodayReserveIdsKey) {
   lineDOM.append($('</tr>'));
   return lineDOM;
 }
-
 
 function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
