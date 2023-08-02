@@ -122,10 +122,10 @@ fetch(url)
 
         switch (matchStatus){
           case matchThrough:
-            arrayLineDOM.push(createTableDataDOM(json.members[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i],haveTodayReserveIdsKey));
             break;
           case matchTrue:
-            arrayLineDOM.push(createTableDataDOM(json.members[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i],haveTodayReserveIdsKey));
             break;
         }
       }
