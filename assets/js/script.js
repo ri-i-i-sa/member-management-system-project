@@ -1,4 +1,6 @@
-const api_url = 'https://script.google.com/macros/s/AKfycby1JBW60FdElZxOJ5qX5Sd1bbRPMEjKc_hV_PexgObSbIOVHrwz3GAICxmwGtvmnDxc/exec';
+MicroModal.init();
+
+const api_url = 'https://script.google.com/macros/s/AKfycbwrbQ3weBvcErE06eM4-QQg6sCqcK4TfcP3HfgBOnVfvZR_hu4O_2Rp44y80A_lg-BM/exec';
 
 const params = {
   view: 'members'
@@ -7,6 +9,9 @@ const params = {
 const matchThrough = 0;
 const matchTrue = 1;
 const matchFalse = 2;
+
+const clockOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+const systemDate = new Date().toLocaleString('ja-JP', clockOptions);
 
 let url = new URL(api_url);
 url.search = new URLSearchParams(params).toString();
@@ -26,14 +31,59 @@ fetch(url)
   })
   .then(function(json) {
     let arrayLineDOM = [];
+    let haveTodayReserveIds = {};
+    let haveTodayReserveIdsKey = []; 
+    let haveTodayReserveIdsValue = []; 
 
-    for (var i in json) {
-      lineDOM = createTableDataDOM(json[i]);
+    for (var i in json.members) {    
+      for (var j in json.histories) {
+        if (json.histories[j].membersId !== json.members[i].id) continue;
+    
+        const arrivalAtValue = new Date(json.histories[j].reserveAt).toLocaleString('ja-JP', clockOptions);
+        let arrivalAtValueResetTime = new Date(arrivalAtValue);
+        arrivalAtValueResetTime.setHours(0, 0, 0, 0);
+    
+        let systemDateResetTime = new Date(systemDate);
+        systemDateResetTime.setHours(0, 0, 0, 0);
+    
+        if ((arrivalAtValueResetTime.toDateString() === systemDateResetTime.toDateString()) && json.histories[j].arrivalFlag === 0) {
+          haveTodayReserveIds[json.histories[j].membersId] = json.histories[j].id;
+
+          haveTodayReserveIdsKey = Object.keys(haveTodayReserveIds).toString();
+          haveTodayReserveIdsValue = Object.values(haveTodayReserveIds).toString();
+        }
+      }
+    
+      lineDOM = createTableDataDOM(json.members[i], haveTodayReserveIdsKey);
       arrayLineDOM.push(lineDOM);
     }
-
+    
     tableRows.after(arrayLineDOM);
 
+    $(document).ready(function() {
+      $('#arrival-btn a').on('click', function(e) {
+        e.preventDefault();
+        MicroModal.show('modal-1');
+        $('#member-name').text($(this).data('name'));
+        $('#hid-input-id').val($(this).data('id'));
+        $(document).ready(function() {
+          $('#ok-btn').on('click', function(e) {
+            e.preventDefault();
+    
+            if (haveTodayReserveIdsKey.includes($('#hid-input-id').val())){
+              let matchingValue = haveTodayReserveIds[$('#hid-input-id').val()];
+
+              params.reserveHistoryId = matchingValue;
+          
+              const url = new URL(api_url);
+              url.search = new URLSearchParams(params).toString();
+            }
+          });
+        });
+      });
+    });
+
+    
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
 
@@ -51,7 +101,7 @@ fetch(url)
 
       let arrayLineDOM = [];
     
-      for (var i in json) {
+      for (var i in json.members) {
 
         lineDOM = $('<tr class="line">');
         let searchId = $("#id-input").val();
@@ -68,17 +118,18 @@ fetch(url)
         if (searchTel) searchConditions.tel = searchTel; 
         if (searchStatus) searchConditions.status = searchStatus; 
 
-        let matchStatus = searchANDConditions(searchConditions, json[i]);
+        let matchStatus = searchANDConditions(searchConditions, json.members[i]);
 
         switch (matchStatus){
           case matchThrough:
-            arrayLineDOM.push(createTableDataDOM(json[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i],haveTodayReserveIdsKey));
             break;
           case matchTrue:
-            arrayLineDOM.push(createTableDataDOM(json[i]));
+            arrayLineDOM.push(createTableDataDOM(json.members[i],haveTodayReserveIdsKey));
             break;
         }
       }
+
       $(".member-view").html(tableRows);
     
       tableRows.after(arrayLineDOM);
@@ -127,9 +178,13 @@ function searchANDConditions(searchConditions, json){
   return matchStatus;
 }
 
-function createTableDataDOM(memberJson){
-  let lineDOM = $('<tr class="line">')
-  let memberInfo = jsonToDictionary(memberJson);
+function isMemberIdInTodayReserveIds(memberId, todayReserveIds) {
+  return todayReserveIds.includes(memberId);
+}
+
+function createTableDataDOM(memberJson,haveTodayReserveIdsKey) {
+  let memberInfo = jsonToDictionary(memberJson,haveTodayReserveIdsKey);
+  let lineDOM = $('<tr class="line">');
   lineDOM.append($('<td>' + memberInfo.memberId + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberName + '<img src="./assets/img/iconmonstr-external-link-thin-240.png" alt="詳細へのリンク"> </th> </td>'));
   lineDOM.append($('<td>' + memberInfo.memberFurigana + '</td>'));
@@ -138,11 +193,19 @@ function createTableDataDOM(memberJson){
   lineDOM.append($('<td>' + memberInfo.memberBirthday + '</td>'));
   lineDOM.append($('<td>' + memberInfo.memberStatus + '</td>'));
   lineDOM.append($('<td>4</td>'));
-  lineDOM.append($('<td><div class="flex"><div class="btn-date"><a href="#" class="text-medium">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
-    memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+
+  if (isMemberIdInTodayReserveIds(memberInfo.memberId, haveTodayReserveIdsKey)) {
+    lineDOM.append($('<td><div class="flex"><div class="arrivalinput-btn" id="arrival-btn"><a class="text-medium" data-name="' + memberInfo.memberName + '" data-id="' + memberInfo.memberId + '">来店登録</a></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+  } else {
+    lineDOM.append($('<td><div class="flex"><div class="empty-element"></div><div class="history-btn" id="history-btn"><a href="./history.html" class="text-medium" id="' +
+      memberInfo.memberId + '" data-name="' + memberInfo.memberName + '">来店履歴</a></div></div></td>'));
+  }
+
   lineDOM.append($('</tr>'));
   return lineDOM;
 }
+
 
 function createTableHeaderDOM() {
   let headerDOM = $('<tr class="heading flex">');
@@ -170,6 +233,12 @@ function jsonToDictionary(json) {
     memberBirthday: birthdayToString(json.birthday),
     memberStatus: getStatusText(json.status)
   };
+}
+
+//どこに置くと可読性高い？ループの中だと読み込み遅くなる。
+setInterval(updateClock, 1000);
+function updateClock() {
+  $('#modal-1-title').text(systemDate);
 }
 
 function getGenderText(genderValue) {

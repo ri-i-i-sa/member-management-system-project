@@ -92,7 +92,7 @@
           <td>
             <div class="flex">
               <div>
-                <a href="#" class="text-medium">来店登録</a>
+                <a class="text-medium">来店登録</a>
               </div>
               <div class="history-btn">
                 <a href="./history.html" class="text-medium">来店履歴</a>
@@ -142,9 +142,33 @@
         </tr>
       </table>
     </div>
+      
+    <div class="modal micromodal-slide" id="modal-1" data-micromodal-close aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1">
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+          <header class="modal__header">
+            <h2 class="modal__title" id="modal-1-title">
+            </h2>
+          </header>
+          <div class="modal__content" id="modal-1-content">
+            <p><span id="member-name">ダミー 名前</span> 様      
+              </br>の来店処理を実行します。
+            </p>
+          </div>
+          <footer class="modal__footer flex">
+            <button class="modal__btn modal__btn-primary" id="ok-btn">OK</button>
+            <input type="hidden" value="" id="hid-input-id" />
+            <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
   </main>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="./node_modules/micromodal/dist/micromodal.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
+

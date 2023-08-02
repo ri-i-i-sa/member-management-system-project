@@ -1,4 +1,4 @@
-const api_url = 'https://script.google.com/macros/s/AKfycby1JBW60FdElZxOJ5qX5Sd1bbRPMEjKc_hV_PexgObSbIOVHrwz3GAICxmwGtvmnDxc/exec';
+const api_url = 'https://script.google.com/macros/s/AKfycbwrbQ3weBvcErE06eM4-QQg6sCqcK4TfcP3HfgBOnVfvZR_hu4O_2Rp44y80A_lg-BM/exec';
 
 tableRows = createHeaderDOM();
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
       tableRows.after(arrayLineDOM);
 
       let $totalAmountDOM = $('<span class="total-price">' + formatAmount(totalAmount) + '</span>');
-      $("#total-text").append($totalAmountDOM);
+      $("#total-amount").append($totalAmountDOM);
     }
   });
   $("#member-table").html(tableRows);
