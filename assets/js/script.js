@@ -65,30 +65,32 @@ fetch(url)
       $('#arrival-btn a').on('click', function(e) {
         e.preventDefault();
         MicroModal.show('modal-1');
-
+    
         $('#member-name').text($(this).data('name'));
         $('#hid-input-id').val($(this).data('id'));
-
-        $(document).ready(function() {
-          $('#ok-btn').on('click', function(e) {
-            e.preventDefault();
+      });
     
-            if (haveTodayReserveIdsKey.includes($('#hid-input-id').val())){
-              let matchingValue = haveTodayReserveIds[$('#hid-input-id').val()];
-              params.reserveHistoryId = matchingValue;
-          
-              url = new URL(api_url);
-              url.search = new URLSearchParams(params).toString();
-
-              fetch(url)
-              .then(function(fetch_data) {
-                return fetch_data.json();
-              })
-            }
+      $('#ok-btn').on('click', function(e) {
+        e.preventDefault();
+    
+        if (haveTodayReserveIdsKey.includes($('#hid-input-id').val())) {
+          let matchingValue = haveTodayReserveIds[$('#hid-input-id').val()];
+          params.reserveHistoryId = matchingValue;
+    
+          url = new URL(api_url);
+          url.search = new URLSearchParams(params).toString();
+    
+          fetch(url)
+          .then(function(fetch_data) {
+            return fetch_data.json();
           })
-        })
-      })
+          .then(function(json) { 
+            let responseJsonToParse = JSON.parse(json)
+          });
+        }
+      });
     });
+    
 
     $('#history-btn a').on('click', function(e) {
       e.preventDefault();
